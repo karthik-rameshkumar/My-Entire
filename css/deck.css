@@ -1,0 +1,792 @@
+/* ============================================================
+   Entire — web deck
+   Brand tokens extracted from entire.io production CSS
+   ============================================================ */
+
+@font-face {
+  font-family: "Entire Headline";
+  src: url("../fonts/entire-headline-semibold.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Entire Headline";
+  src: url("../fonts/entire-headline-semibolditalic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Entire Mono";
+  src: url("../fonts/entire-mono-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Entire Mono";
+  src: url("../fonts/entire-mono-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  /* entire.io dark neutrals */
+  --n0: #070707; --n50: #111; --n100: #161616; --n150: #1c1c1c;
+  --n200: #222;  --n250: #292929; --n300: #333; --n400: #4e4e4e;
+  --n500: #707070; --n600: #949494; --n700: #b9b9b9; --n800: #d9d9d9;
+  --n900: #f3f3f3; --n1000: #fff;
+
+  --accent: #f25533;
+  --accent-soft: rgba(242, 85, 51, 0.14);
+
+  --surface-sunken: var(--n50);
+  --surface-base: var(--n100);
+  --surface-raised: var(--n150);
+  --surface-floating: var(--n200);
+
+  --border: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --text: var(--n900);
+  --text-muted: var(--n700);
+  --text-dim: var(--n500);
+
+  /* status colors (entire.io trail/runner palette) */
+  --lime: #9ae600;
+  --amber: #fdc700;
+  --amber-deep: #fd9a00;
+  --blue: #51a2ff;
+  --indigo: #7c86ff;
+  --red: #fb6461;
+
+  --font-headline: "Entire Headline", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Entire Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--n0);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.05vw, 19px);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   Stage background: dot grid + drifting accent glow
+   ============================================================ */
+.stage-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, black 30%, transparent 100%);
+}
+.stage-glow {
+  position: fixed; z-index: 0; pointer-events: none;
+  width: 65vw; height: 65vw; border-radius: 50%;
+  left: 50%; top: 60%;
+  background: radial-gradient(circle, rgba(242,85,51,0.09) 0%, rgba(242,85,51,0.03) 40%, transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: glow-drift 26s ease-in-out infinite alternate;
+  filter: blur(20px);
+}
+@keyframes glow-drift {
+  0%   { transform: translate(-62%, -46%) scale(1); }
+  50%  { transform: translate(-42%, -58%) scale(1.15); }
+  100% { transform: translate(-55%, -42%) scale(0.95); }
+}
+
+/* ============================================================
+   Deck chrome
+   ============================================================ */
+.deck { position: fixed; inset: 0; z-index: 1; }
+
+.progress {
+  position: fixed; left: 0; bottom: 0; height: 3px; z-index: 40;
+  background: var(--accent);
+  width: 0;
+  transition: width 0.45s var(--ease-out);
+  box-shadow: 0 0 12px rgba(242, 85, 51, 0.6);
+}
+.hud {
+  position: fixed; z-index: 40; bottom: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.08em;
+  color: var(--text-dim);
+  user-select: none;
+}
+.hud-counter { right: 1.8rem; }
+.hud-act { left: 1.8rem; text-transform: uppercase; }
+.hud-act em { color: var(--accent); font-style: normal; }
+.hud-mark {
+  position: fixed; z-index: 40; top: 1.5rem; right: 1.8rem;
+  width: 26px; height: 26px; opacity: 0.5;
+}
+.hud-mark img { width: 100%; height: 100%; display: block; }
+
+/* ============================================================
+   Slides
+   ============================================================ */
+.slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 4.5rem 5.5rem 5rem;
+  opacity: 0; visibility: hidden;
+  transform: translateY(14px) scale(0.995);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out), visibility 0s linear 0.5s;
+  overflow: hidden;
+}
+.slide.active {
+  opacity: 1; visibility: visible;
+  transform: none;
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+  z-index: 10;
+}
+.wrap { width: min(1180px, 100%); }
+.wrap-narrow { width: min(940px, 100%); }
+
+/* entrance animation for slide children */
+[data-animate] { opacity: 0; }
+.slide.active [data-animate] {
+  animation: rise 0.8s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 100ms + 180ms);
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* fragments (revealed on keypress) */
+[data-fragment] {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+[data-fragment].revealed { opacity: 1; transform: none; }
+
+/* ============================================================
+   Shared typography & components
+   ============================================================ */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.6rem;
+  display: flex; align-items: center; gap: 0.9rem;
+}
+.kicker::before {
+  content: ""; display: block; width: 2.2rem; height: 1px;
+  background: var(--accent); opacity: 0.7;
+}
+
+h1, h2 {
+  font-family: var(--font-headline);
+  font-weight: 620;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
+.sub {
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.35vw, 1.3rem);
+  line-height: 1.55;
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+.sub strong, .sub em { color: var(--text); font-style: normal; }
+.accent { color: var(--accent); }
+.dim { color: var(--text-dim); }
+
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.3rem 1.5rem;
+}
+.card-floating {
+  background: var(--surface-floating);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+}
+.chip {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  font-family: var(--font-mono); font-size: 0.78rem;
+  padding: 0.42em 0.85em;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-base);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; }
+
+.mono { font-family: var(--font-mono); }
+
+.quote-mark { color: var(--accent); font-family: var(--font-headline); }
+
+/* ============================================================
+   Slide 1 — Title
+   ============================================================ */
+.s-title { text-align: center; flex-direction: column; }
+.s-title .logo { width: min(480px, 55vw); margin: 0 auto 2.6rem; display: block; }
+.s-title h1 { font-size: clamp(1.6rem, 2.6vw, 2.4rem); color: var(--text-muted); font-weight: 480; }
+.s-title h1 strong { color: var(--text); font-weight: 640; }
+.s-title .title-tagline {
+  margin-top: 3.2rem;
+  font-family: var(--font-mono); font-size: 0.82rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim);
+}
+.s-title .title-tagline em { color: var(--accent); font-style: normal; }
+.title-rule {
+  width: 64px; height: 2px; background: var(--accent);
+  margin: 2.4rem auto 0; border-radius: 2px;
+  box-shadow: 0 0 16px rgba(242,85,51,0.7);
+}
+
+/* ============================================================
+   Act dividers
+   ============================================================ */
+.s-act { }
+.s-act .act-num {
+  font-family: var(--font-headline);
+  font-size: clamp(7rem, 17vw, 15rem);
+  font-weight: 700; line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.16);
+  user-select: none;
+  position: relative;
+}
+.s-act .act-num::after {
+  content: attr(data-n);
+  position: absolute; inset: 0;
+  color: var(--accent);
+  -webkit-text-stroke: 0;
+  clip-path: inset(62% 0 0 0);
+}
+.s-act h2 { font-size: clamp(2.6rem, 5vw, 4.6rem); margin-top: 1.6rem; }
+.s-act .sub { margin-top: 0.8rem; }
+
+/* ============================================================
+   Slide 3 — Terminal (agent forgot everything)
+   ============================================================ */
+.s-forgot .cols { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 3.4rem; align-items: center; }
+
+.term {
+  background: var(--n50);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.75;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+.term-bar {
+  display: flex; align-items: center; gap: 0.45rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.term-bar .tb { width: 10px; height: 10px; border-radius: 50%; background: var(--n300); }
+.term-bar .tb-title {
+  margin-left: 0.6rem; font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.06em;
+}
+.term-body { padding: 1rem 1.2rem 1.2rem; min-height: 15.5rem; }
+.term-body .ln { white-space: pre-wrap; opacity: 0; }
+.slide.active .term-body .ln {
+  animation: term-ln 0.35s ease-out both;
+  animation-delay: calc(var(--t) * 1ms);
+}
+@keyframes term-ln { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.ln .p { color: var(--accent); }
+.ln .ok { color: var(--lime); }
+.ln .warn { color: var(--amber); }
+.ln .tool { color: var(--blue); }
+.ln .mut { color: var(--text-dim); }
+
+/* session 1 fades to ghost as session 2 appears */
+.slide.active .term-session1 { animation: term-ghost 1.2s var(--ease-out) both; animation-delay: 6.4s; }
+@keyframes term-ghost { to { opacity: 0.28; filter: blur(1px) grayscale(0.5); transform: scale(0.975) translateY(-6px); } }
+.term-session2 { margin-top: -8.2rem; position: relative; opacity: 0; transform: translateY(24px); }
+.slide.active .term-session2 { animation: term-new 0.9s var(--ease-out) both; animation-delay: 6.9s; }
+@keyframes term-new { to { opacity: 1; transform: none; } }
+.term-session2 .term-body { min-height: 7rem; }
+.cursor {
+  display: inline-block; width: 0.55em; height: 1.1em;
+  background: var(--text); vertical-align: text-bottom;
+  animation: blink 1.05s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.s-forgot h2 { font-size: clamp(2rem, 3.3vw, 3rem); }
+.forgot-punch {
+  margin-top: 1.8rem; padding-left: 1.2rem;
+  border-left: 3px solid var(--accent);
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  color: var(--text-muted); line-height: 1.5;
+}
+.forgot-punch strong { color: var(--text); }
+
+/* ============================================================
+   Slide 4 — created vs lost
+   ============================================================ */
+.s-knowledge .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.4rem; }
+.panel-label {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.6rem;
+}
+.panel-label.gain { color: var(--lime); }
+.panel-label.loss { color: var(--amber-deep); }
+.stack { display: flex; flex-direction: column; gap: 0.55rem; }
+.stack-item {
+  display: flex; align-items: center; gap: 0.8rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.68rem 1rem;
+  font-size: 0.95rem; color: var(--text-muted);
+}
+.stack-item .ico { color: var(--text-dim); flex: none; width: 1.1em; text-align: center; font-family: var(--font-mono); }
+.stack-item.gain-i .ico { color: var(--lime); }
+.stack-item.loss-i .ico { color: var(--amber-deep); }
+.stack-item strong { color: var(--text); font-weight: 560; }
+
+/* ============================================================
+   Slide 5 — git result vs process
+   ============================================================ */
+.s-git .cols { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 2.2rem; margin-top: 2.2rem; align-items: stretch; }
+.git-panel { font-family: var(--font-mono); font-size: 0.82rem; line-height: 2.05; }
+.git-panel .cm { color: var(--text-dim); }
+.git-panel .sha { color: var(--amber); }
+.git-panel .q { color: var(--text); }
+.git-answers .head, .git-questions .head {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.git-answers .head { color: var(--text-dim); }
+.git-questions .head { color: var(--accent); }
+.q-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.q-list li {
+  padding: 0.55rem 1rem;
+  border: 1px dashed rgba(242,85,51,0.35);
+  background: rgba(242,85,51,0.05);
+  border-radius: 10px;
+  font-size: 0.93rem; color: var(--text-muted);
+}
+.q-list li strong { color: var(--text); font-weight: 560; }
+.pull-quote {
+  margin-top: 2rem;
+  font-family: var(--font-headline); font-weight: 560; font-style: italic;
+  font-size: clamp(1.25rem, 1.9vw, 1.7rem);
+  color: var(--text); line-height: 1.35; text-wrap: balance;
+}
+.pull-quote .accent { font-style: italic; }
+
+/* ============================================================
+   Slide 6 — fragmentation
+   ============================================================ */
+.agent-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin: 2.6rem 0 2.4rem; }
+.agent-tile {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.15rem 1.1rem 1rem;
+  display: flex; flex-direction: column; gap: 0.55rem;
+}
+.agent-tile .a-name { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--text); }
+.agent-tile .a-role { font-size: 0.78rem; color: var(--text-dim); }
+.a-hist { display: flex; gap: 3px; margin-top: 0.5rem; }
+.a-hist i {
+  height: 7px; flex: 1; border-radius: 2px;
+  background: var(--n300);
+}
+.a-hist i.on { background: var(--accent); opacity: 0.85; }
+.frag-q {
+  font-family: var(--font-headline); font-weight: 600;
+  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  line-height: 1.25; text-wrap: balance;
+}
+.frag-a { margin-top: 1.1rem; }
+
+/* ============================================================
+   Slide 8 — Meet Entire (checkpoint graph)
+   ============================================================ */
+.ckpt-scene { margin-top: 2.6rem; position: relative; }
+.ckpt-rail { position: relative; height: 210px; }
+.ckpt-line {
+  position: absolute; left: 2%; right: 2%; bottom: 26px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--n400) 8%, var(--n400) 92%, transparent);
+}
+.ckpt-node { position: absolute; bottom: 0; transform: translateX(-50%); text-align: center; }
+.ckpt-node .dot {
+  display: block;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--n0); border: 2.5px solid var(--n600);
+  margin: 0 auto;
+}
+.ckpt-node .sha { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 0.55rem; display: block; }
+.ckpt-node .link {
+  width: 2px; height: 52px; margin: 0 auto;
+  background: repeating-linear-gradient(180deg, var(--accent) 0 4px, transparent 4px 8px);
+  opacity: 0.75;
+}
+.ckpt-card {
+  position: relative;
+  width: 200px;
+  background: var(--surface-floating);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  font-size: 0.72rem;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.45);
+  margin: 0 auto;
+}
+.ckpt-card .cc-head {
+  display: flex; align-items: center; gap: 0.45rem;
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.66rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.ckpt-card .cc-head::before { content: "◈"; }
+.ckpt-card ul { list-style: none; color: var(--text-muted); line-height: 1.75; }
+.ckpt-card li::before { content: "· "; color: var(--text-dim); }
+.ckpt-node.hero .dot { border-color: var(--accent); box-shadow: 0 0 14px rgba(242,85,51,0.6); }
+.meet-line { margin-top: 2.2rem; }
+
+/* ============================================================
+   Slide 9 — how it works
+   ============================================================ */
+.arch { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.6rem; align-items: center; margin-top: 2.4rem; }
+.arch-col { display: flex; flex-direction: column; gap: 0.85rem; }
+.arch-col .col-head {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim);
+  margin-bottom: 0.2rem;
+}
+.arch-box {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+}
+.arch-box .b-t { font-weight: 600; font-size: 0.95rem; }
+.arch-box .b-d { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.2rem; }
+.arch-core {
+  background: linear-gradient(180deg, rgba(242,85,51,0.12), rgba(242,85,51,0.05));
+  border: 1px solid rgba(242,85,51,0.45);
+  border-radius: 16px;
+  padding: 1.6rem 1.7rem;
+  text-align: center;
+  min-width: 240px;
+  box-shadow: 0 0 44px rgba(242,85,51,0.12);
+}
+.arch-core .core-glyph { font-size: 1.9rem; color: var(--accent); line-height: 1; }
+.arch-core .core-t { font-family: var(--font-headline); font-weight: 640; font-size: 1.35rem; margin-top: 0.6rem; }
+.arch-core .core-d { font-family: var(--font-mono); font-size: 0.66rem; color: var(--text-dim); margin-top: 0.55rem; letter-spacing: 0.05em; }
+.arch-arrow { color: var(--n500); font-size: 1.3rem; text-align: center; }
+.read-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.arch-note { margin-top: 2rem; }
+
+/* ============================================================
+   Slide 10 — capabilities grid
+   ============================================================ */
+.cap-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1rem; margin-top: 2.4rem;
+}
+.cap {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2rem 1.2rem 1.1rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.cap:hover { border-color: rgba(242,85,51,0.5); transform: translateY(-3px); }
+.cap .c-ico {
+  font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent);
+  display: block; margin-bottom: 0.7rem;
+}
+.cap .c-t { font-weight: 620; font-size: 0.98rem; font-family: var(--font-headline); letter-spacing: 0; }
+.cap .c-d { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.4rem; line-height: 1.5; }
+.cap-wide { grid-column: span 1; }
+
+/* ============================================================
+   Slide 11 — what Entire is not
+   ============================================================ */
+.not-list { list-style: none; margin-top: 2.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 2.4rem; }
+.not-list li {
+  font-family: var(--font-headline); font-weight: 540;
+  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+  color: var(--text-dim);
+  display: flex; align-items: baseline; gap: 0.7rem;
+}
+.not-list li .x { color: var(--red); font-family: var(--font-mono); font-size: 0.8em; }
+.not-list li s { text-decoration-color: rgba(251,100,97,0.55); text-decoration-thickness: 2px; }
+.is-line {
+  margin-top: 2.6rem;
+  font-family: var(--font-headline); font-weight: 620;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  line-height: 1.3; text-wrap: balance;
+}
+
+/* ============================================================
+   Slide 12 — live demo
+   ============================================================ */
+.s-demo { text-align: center; }
+.demo-steps {
+  display: flex; justify-content: center; gap: 0.85rem; flex-wrap: wrap;
+  margin: 2.6rem auto 0; max-width: 900px;
+  counter-reset: step;
+}
+.demo-step {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  background: var(--surface-base);
+  padding: 0.55em 1em; border-radius: 999px;
+  counter-increment: step;
+}
+.demo-step::before { content: counter(step, decimal-leading-zero) " "; color: var(--accent); font-weight: 700; }
+.demo-land {
+  margin-top: 3.6rem;
+  font-family: var(--font-headline); font-weight: 640;
+  font-size: clamp(1.9rem, 3.6vw, 3.4rem);
+  line-height: 1.16; text-wrap: balance;
+}
+.demo-land .accent { display: inline; }
+
+/* ============================================================
+   Slide 14 — progression
+   ============================================================ */
+.prog { display: flex; align-items: center; gap: 0; margin: 3.2rem 0 2.6rem; }
+.prog-step { flex: 1; text-align: center; position: relative; }
+.prog-step .p-dot {
+  display: block;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--n0); border: 2.5px solid var(--n500);
+  margin: 0 auto 0.9rem; position: relative; z-index: 2;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.prog-step .p-name { font-family: var(--font-headline); font-weight: 620; font-size: clamp(1rem, 1.55vw, 1.4rem); }
+.prog-step .p-sub { font-size: 0.76rem; color: var(--text-dim); margin-top: 0.35rem; }
+.prog-step::before {
+  content: ""; position: absolute; top: 7px; left: -50%; width: 100%; height: 2px;
+  background: var(--n300); z-index: 1;
+}
+.prog-step:first-child::before { display: none; }
+.slide.active .prog-step { animation: prog-on 0.5s var(--ease-out) both; animation-delay: calc(var(--i) * 320ms + 400ms); opacity: 0; }
+@keyframes prog-on { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.slide.active .prog-step .p-dot { animation: dot-on 0.4s both; animation-delay: calc(var(--i) * 320ms + 550ms); }
+@keyframes dot-on { to { border-color: var(--accent); box-shadow: 0 0 12px rgba(242,85,51,0.55); } }
+.prog-step.done .p-name { color: var(--text); }
+
+/* ============================================================
+   Slide 15 — Trails / Runners / Gates
+   ============================================================ */
+.prim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
+.prim {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem 1.5rem 1.4rem;
+  display: flex; flex-direction: column; gap: 0.85rem;
+  position: relative; overflow: hidden;
+}
+.prim::after {
+  content: ""; position: absolute; top: 0; left: 1.5rem; right: 1.5rem; height: 2px;
+  background: var(--pc, var(--accent)); border-radius: 2px; opacity: 0.9;
+}
+.prim .pr-glyph { font-family: var(--font-mono); font-size: 1.5rem; color: var(--pc, var(--accent)); line-height: 1; }
+.prim h3 { font-family: var(--font-headline); font-weight: 640; font-size: 1.45rem; }
+.prim .pr-tag { font-size: 1rem; color: var(--text); font-weight: 560; margin-top: -0.4rem; }
+.prim ul { list-style: none; display: flex; flex-direction: column; gap: 0.42rem; }
+.prim li { font-size: 0.85rem; color: var(--text-dim); line-height: 1.45; padding-left: 1em; position: relative; }
+.prim li::before { content: "–"; position: absolute; left: 0; color: var(--pc, var(--accent)); }
+.prim-trail { --pc: var(--accent); }
+.prim-runner { --pc: var(--blue); }
+.prim-gate { --pc: var(--indigo); }
+.prim-foot { margin-top: 2rem; font-size: 0.95rem; color: var(--text-dim); }
+.prim-foot strong { color: var(--text-muted); font-weight: 560; }
+
+/* ============================================================
+   Slide 16 — concrete example
+   ============================================================ */
+.trail-card {
+  margin-top: 2.2rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.trail-head {
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.trail-head .t-title { font-weight: 620; font-family: var(--font-headline); font-size: 1.15rem; flex: 1; min-width: 300px; }
+.branch-chip {
+  font-family: var(--font-mono); font-size: 0.74rem;
+  color: var(--text-muted);
+  background: var(--n50); border: 1px solid var(--border);
+  padding: 0.35em 0.8em; border-radius: 7px;
+}
+.branch-chip::before { content: "⎇ "; color: var(--accent); }
+.runner-rows { display: flex; flex-direction: column; }
+.runner-row {
+  display: grid; grid-template-columns: 1.15fr 1.6fr 0.9fr;
+  gap: 1rem; align-items: center;
+  padding: 0.95rem 1.4rem;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.9rem;
+}
+.runner-row:last-child { border-bottom: none; }
+.runner-row .r-name { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; }
+.runner-row .r-q { color: var(--text-dim); font-size: 0.85rem; }
+.verdict {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.4em 0.9em; border-radius: 999px;
+  justify-self: end; white-space: nowrap;
+}
+.verdict-info { color: var(--lime); background: rgba(154,230,0,0.1); border: 1px solid rgba(154,230,0,0.3); }
+.verdict-block { color: var(--red); background: rgba(251,100,97,0.1); border: 1px solid rgba(251,100,97,0.35); }
+.verdict-review { color: var(--amber); background: rgba(253,199,0,0.09); border: 1px solid rgba(253,199,0,0.3); }
+.concrete-line { margin-top: 2rem; font-family: var(--font-headline); font-weight: 600; font-size: clamp(1.3rem, 2.1vw, 1.9rem); }
+
+/* ============================================================
+   Slide 17 — workflow SVG
+   ============================================================ */
+.flow-wrap { margin-top: 1.6rem; display: flex; justify-content: center; }
+.flow-svg { width: min(980px, 100%); height: auto; overflow: visible; }
+.flow-svg .fbox { fill: var(--surface-raised); stroke: rgba(255,255,255,0.14); rx: 12; }
+.flow-svg .fbox-hi { fill: rgba(242,85,51,0.1); stroke: rgba(242,85,51,0.5); }
+.flow-svg .fbox-gate { fill: rgba(124,134,255,0.08); stroke: rgba(124,134,255,0.45); }
+.flow-svg text { fill: var(--text); font-family: var(--font-sans); font-size: 15px; font-weight: 600; }
+.flow-svg .ft-sub { fill: var(--text-dim); font-size: 11.5px; font-weight: 400; font-family: var(--font-mono); }
+.flow-svg .fedge { stroke: var(--n500); stroke-width: 1.8; fill: none; marker-end: url(#arrow); }
+.flow-svg .fedge-dash { stroke-dasharray: 5 6; stroke: var(--indigo); opacity: 0.85; }
+.flow-svg .fedge-label { fill: var(--text-dim); font-size: 11px; font-weight: 400; font-family: var(--font-mono); }
+.slide.active .flow-svg .fedge { stroke-dashoffset: 0; }
+.slide.active .flow-svg g[data-step] { animation: rise 0.6s var(--ease-out) both; animation-delay: calc(var(--i) * 240ms + 300ms); opacity: 0; }
+
+/* ============================================================
+   Slide 19 — git network
+   ============================================================ */
+.s-network .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 1.4rem; }
+.net-scene { position: relative; height: 420px; }
+.net-svg { width: 100%; height: 100%; overflow: visible; }
+.net-svg .cell { fill: rgba(242,85,51,0.07); stroke: rgba(242,85,51,0.5); stroke-width: 1.5; }
+.net-svg .cell-core { fill: var(--surface-floating); stroke: rgba(255,255,255,0.25); }
+.net-svg .spoke { stroke: rgba(242,85,51,0.35); stroke-width: 1.2; stroke-dasharray: 3 5; }
+.net-svg .up { stroke: rgba(255,255,255,0.28); stroke-width: 1.4; stroke-dasharray: 2 4; }
+.net-svg text { fill: var(--text-muted); font-family: var(--font-mono); font-size: 11px; }
+.net-svg .n-core-t { fill: var(--text); font-size: 13px; font-weight: 700; }
+.net-svg .pulse { fill: none; stroke: var(--accent); stroke-width: 1.2; opacity: 0; transform-origin: center; transform-box: fill-box; }
+.slide.active .net-svg .pulse { animation: net-pulse 3s ease-out infinite; animation-delay: calc(var(--i) * 0.9s); }
+@keyframes net-pulse {
+  0% { opacity: 0.75; transform: scale(0.6); }
+  70% { opacity: 0; transform: scale(1.8); }
+  100% { opacity: 0; transform: scale(1.8); }
+}
+.net-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1.6rem; }
+.net-list li {
+  display: flex; gap: 0.75rem; align-items: baseline;
+  font-size: 0.95rem; color: var(--text-muted);
+}
+.net-list li::before { content: "▸"; color: var(--accent); font-size: 0.8em; }
+.net-quote {
+  margin-top: 2rem; padding-left: 1.2rem; border-left: 3px solid var(--accent);
+  font-family: var(--font-headline); font-style: italic; font-weight: 540;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem); color: var(--text); line-height: 1.4;
+}
+.preview-chip { margin-left: 0.8rem; vertical-align: middle; font-size: 0.62rem; }
+
+/* ============================================================
+   Slide 21 — principles
+   ============================================================ */
+.princ-list { list-style: none; margin-top: 2.4rem; columns: 2; column-gap: 3.5rem; }
+.princ-list li {
+  break-inside: avoid;
+  font-family: var(--font-headline); font-weight: 560;
+  font-size: clamp(1.1rem, 1.7vw, 1.55rem);
+  line-height: 1.32;
+  padding: 0.62rem 0;
+  color: var(--text-muted);
+  display: flex; gap: 0.9rem; align-items: baseline;
+}
+.princ-list li .n {
+  font-family: var(--font-mono); font-size: 0.62em; font-weight: 700;
+  color: var(--accent); flex: none; letter-spacing: 0.05em;
+}
+.princ-list li strong { color: var(--text); font-weight: 620; }
+
+/* ============================================================
+   Slide 22 — CTA
+   ============================================================ */
+.s-cta .cols { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3.2rem; align-items: center; }
+.cta-term { font-size: 0.78rem; }
+.cta-term .term-body { min-height: 0; }
+.cta-list { list-style: none; display: grid; grid-template-columns: 1fr; gap: 0.55rem; margin-top: 2rem; }
+.cta-list li {
+  display: flex; gap: 0.8rem; align-items: baseline;
+  font-size: 0.98rem; color: var(--text-muted);
+}
+.cta-list li::before { content: "□"; font-family: var(--font-mono); color: var(--accent); }
+.cta-list li strong { color: var(--text); font-weight: 560; }
+
+/* ============================================================
+   Slide 23 — closing
+   ============================================================ */
+.s-close { text-align: center; }
+.s-close .marvin {
+  width: 108px; margin: 0 auto 2.2rem; display: block;
+  filter: drop-shadow(0 10px 30px rgba(242,85,51,0.25));
+}
+.close-quote {
+  font-family: var(--font-headline); font-weight: 560; font-style: italic;
+  font-size: clamp(1.2rem, 2vw, 1.75rem);
+  color: var(--text-muted); line-height: 1.45;
+  max-width: 46ch; margin: 0 auto; text-wrap: balance;
+}
+.close-quote strong { color: var(--text); font-style: italic; }
+.close-beats { margin-top: 3.4rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.close-beats span {
+  font-family: var(--font-headline); font-weight: 660;
+  font-size: clamp(1.7rem, 3.2vw, 3rem);
+  line-height: 1.15;
+}
+.close-beats span:last-child { color: var(--accent); }
+.close-logo { width: 130px; margin: 3.4rem auto 0; opacity: 0.85; display: block; }
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }
+  .stage-glow { animation: none; }
+  [data-animate], .slide.active [data-animate] { opacity: 1; animation: none; }
+  .slide.active .prog-step, .slide.active .term-body .ln { opacity: 1; animation: none; }
+}
+
+/* ============================================================
+   Smaller screens
+   ============================================================ */
+@media (max-width: 1100px) {
+  .slide { padding: 3rem 2.5rem 4rem; }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+  .agent-row { grid-template-columns: repeat(3, 1fr); }
+  .s-forgot .cols, .s-knowledge .cols, .s-git .cols, .s-cta .cols, .s-network .cols { grid-template-columns: 1fr; gap: 2rem; }
+  .prim-grid { grid-template-columns: 1fr; }
+  .princ-list { columns: 1; }
+  .runner-row { grid-template-columns: 1fr; gap: 0.3rem; }
+  .verdict { justify-self: start; }
+}
