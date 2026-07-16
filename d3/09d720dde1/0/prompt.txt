@@ -242,3 +242,7 @@ Closing:
 “Agents are going to write more of our code. Developers should still own the context, rules, and infrastructure around how that code gets built.”
 Final slide:
 Use the agent you want. Keep the context. Own your history. Build what comes next.
+
+---
+
+commit this.
