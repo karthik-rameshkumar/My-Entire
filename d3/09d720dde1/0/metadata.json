@@ -1,0 +1,74 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "d309d720dde1",
+  "session_id": "c5f971e5-bab0-44a3-8883-b0d1486293b1",
+  "strategy": "manual-commit",
+  "created_at": "2026-07-16T14:01:24.1446544Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "save_step_count": 1,
+  "files_touched": [
+    "README.md",
+    "assets/logo.svg",
+    "assets/mark.svg",
+    "assets/marvin-face.png",
+    "css/deck.css",
+    "fonts/entire-headline-semibold.woff2",
+    "fonts/entire-headline-semibolditalic.woff2",
+    "fonts/entire-mono-bold.woff2",
+    "fonts/entire-mono-regular.woff2",
+    "index.html",
+    "js/deck.js"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-8[1m]",
+  "turn_id": "cf8fd2cf3363",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 95,
+    "cache_creation_tokens": 151072,
+    "cache_read_tokens": 5137578,
+    "output_tokens": 62020,
+    "api_call_count": 51
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-07-16T14:01:22.793467Z",
+    "agent_lines": 1554,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 2,
+    "total_committed": 1554,
+    "total_lines_changed": 1556,
+    "agent_percentage": 99.87146529562982,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 287,
+      "user_lines_removed": 203,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".claude/settings.json": 84,
+        "LICENSE": 201,
+        "README.md": 2
+      },
+      "user_removed_per_file": {
+        "LICENSE": 201,
+        "README.md": 2
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 1642,
+      "agent_lines_removed": 1
+    }
+  ]
+}

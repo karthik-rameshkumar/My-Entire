@@ -1,0 +1,244 @@
+You are going to help me make a presentation for Entire.io. This will not be a PPTX, instead it will be a web based presentation that I will show everyone on my local. this needs to be fabulous, have amazing graphics and stick to the entire.io brand guidelines as well. 
+
+Here's the script :
+
+Act 1: The developer problem
+1. Your agent forgot everything
+Opening:
+“A coding agent can spend an hour exploring your repository, run dozens of tools, discover three hidden constraints, get corrected twice, and finally produce the right change.
+Then you close the session, switch agents, or return next week, and none of that context follows you.”
+We have made coding agents incredibly capable, but strangely forgetful.
+Every new session feels like the agent’s first day on the project.
+2. This is not merely lost chat history
+During an agent session, useful development knowledge is created:
+What you were trying to accomplish
+Which files and systems mattered
+What constraints were discovered
+What approaches did not work
+What the agent misunderstood
+What you corrected
+Why the final implementation looks the way it does
+When the session disappears, the code survives, but much of the knowledge behind it does not.
+That affects humans and agents:
+You repeat prompts
+Agents repeat investigations
+Handoffs lose important context
+Reviewers reverse-engineer intent from the diff
+Strange code becomes impossible to explain
+Useful workflows remain trapped in old conversations
+3. Git stores the result, not the process
+Git is excellent at answering:
+What changed?
+Who committed it?
+When did it happen?
+Agentic development introduces new questions:
+What task was this change trying to accomplish?
+Which agent and session produced it?
+Why was this approach selected?
+What did the agent try before this?
+What did the developer correct?
+Can another agent continue the work?
+Why does this particular line exist?
+The diff is becoming a smaller representation of the actual work.
+If the code is worth versioning, the context that produced it is worth versioning too.
+4. Agent history is fragmented
+Developers increasingly use more than one agent:
+One agent for exploration
+Another for implementation
+Another for review
+Different models for different repositories
+Local agents, cloud agents, and IDE agents
+Each tool maintains its own partial history.
+That creates a fundamental question:
+Should your development history belong to the agent vendor, or should it belong to you and your repository?
+Entire’s answer is that context should be portable across agents and connected to the code it created.
+Act 2: Entire today
+5. Meet Entire
+Entire is building an agent-native developer platform where code and its production context evolve together.
+Today, that starts with the open-source Entire CLI and Checkpoints.
+When you work with a supported coding agent, Entire preserves the visible session context and associates it with the resulting Git history:
+Prompts and transcripts
+Tool activity
+Files explored and changed
+Human feedback
+Sessions and commits
+Agent provenance
+The path from intent to implementation
+Your repository does not just remember the final answer. It remembers how you arrived there. Checkpoints overview
+6. How it works
+Keep the explanation concrete.
+The write path
+Entire uses agent and Git integrations to observe the development session.
+When the work is committed, Entire creates a structured Checkpoint associated with the relevant Git history. Checkpoint data is stored separately from the source code, so the application code itself remains unchanged.
+The read path
+Humans and agents can later use that history through:
+Search
+Explain
+Blame
+Activity summaries
+Session handoff
+Reusable skills
+Entire’s CLI and web experience
+The simple architecture is:
+Checkpoints preserve the work. Entire’s tools and skills bring it back when someone needs it.
+7. What this lets developers do today
+Return to a task after a week
+Ask what happened, what was discovered, and what remained unfinished.
+Switch agents without starting over
+Let another agent retrieve and summarize the previous session.
+Understand unfamiliar code
+Trace a function, file, or line back to the session that produced it.
+Investigate a regression
+See the original task and implementation path rather than guessing from the diff.
+Review agent-generated changes
+Compare the resulting code with the instructions and constraints that produced it.
+Search past work
+Find an earlier investigation or implementation by repository, branch, topic, author, or time.
+Reuse successful workflows
+Turn a useful session into a skill instead of repeating the same prompt sequence manually.
+Entire’s cross-agent skills already support search, explanation, investigation, and handoff. Entire Skills
+8. What Entire is not
+Clarity matters as much as ambition.
+Entire is not:
+Another coding agent
+A model proxy
+Merely a prompt manager
+A generic chat archive
+A replacement for GitHub today
+A prescribed agent orchestration framework
+A requirement to use one specific agent or model
+Entire sits across agents and connects their work to durable development history.
+9. The live demo
+Use a task that requires enough investigation to create meaningful context.
+Start a task with one coding agent.
+Let it inspect the repository and implement a change.
+Commit the result and show the Checkpoint.
+Open a fresh session with another agent.
+Ask why a specific line exists.
+Show it retrieving the original session.
+Ask it to continue the task.
+Show that it begins with the previous discoveries and constraints.
+The line to land:
+The model changed. The terminal changed. The context survived.
+A second short demo can show a reviewer using Entire Blame or Explain to understand a non-obvious implementation decision.
+Act 3: From durable history to a developer harness
+10. Checkpoints are the foundation, not the destination
+Once code is connected to intent, sessions, and decisions, developers can build much richer workflows around it.
+The progression is:
+Preserve → Understand → Reuse → Evaluate → Coordinate
+This is where Entire grows from durable agent history into a programmable harness for agentic development.
+11. What Trails, Runners, and Gates mean
+Entire is not designing one workflow that every developer must follow. It is building composable primitives that developers can combine however they want.
+Trails give work a home
+A Trail is a task item linked to exactly one branch.
+It brings together the relevant context for that work:
+The intended outcome
+The branch and code
+Agent sessions and Checkpoints
+Previous attempts and decisions
+Evaluation outcomes
+A Trail is the living context for a task while humans and agents work on it.
+It does not have to replace your issue tracker or pull requests.
+Runners ask questions about the work
+A Runner is a repository-defined agent evaluation.
+Its configuration lives in the repository, similar to an Actions workflow. The developer defines the prompt, available context, and what should be evaluated.
+The evaluation runs in an ephemeral environment and can consider repository code, task intent, sessions, or the complete context of a Trail.
+A Runner might ask:
+Does this implementation satisfy the task?
+Did it preserve the public API?
+Does it follow the repository’s architecture?
+Are the tests meaningful?
+Has the agent introduced a security problem?
+Is this ready for review?
+A Runner returns an evaluation outcome. It does not automatically block anything.
+Gates decide the consequence
+A Gate is an enhanced branch-protection policy.
+A Gate can use a Runner outcome to:
+Block the change
+Require human review
+Allow the change
+Trigger another workflow
+But a Runner outcome can also remain an informational health indicator.
+A Runner tells you what it thinks. A Gate determines what that means.
+They are standalone primitives
+A Trail can exist without Runners or Gates
+A Runner can evaluate work without a Trail
+A Runner outcome does not have to become a Gate
+A Gate can require review without using a Runner
+Trails conveniently combine task, branch, sessions, code, and evaluations
+The short explanation:
+Trails give work a home. Runners ask questions. Gates decide what happens next.
+12. Make it concrete
+Imagine a Trail for:
+“Replace the existing rate limiter without changing the public API.”
+It is linked to feature/rate-limiter and includes the branch, task, agent sessions, implementation decisions, and code.
+The repository could define three Runners:
+Task completeness: Did the implementation achieve the requested outcome?
+Compatibility: Has the public API changed?
+Performance: Does the new implementation perform better under the expected load?
+The developer might configure them differently:
+Task completeness is shown as a health indicator
+A compatibility failure blocks the branch
+An uncertain performance result requires review
+Entire does not decide what “good” means.
+The developer defines:
+What should be evaluated
+Which context should be considered
+Which outcomes are informational
+Which outcomes require action
+13. The future workflow
+flowchart TD
+    T["Trail: task, branch and context"] --> A["Humans and agents perform work"]
+    A --> C["Checkpoints preserve the history"]
+    C --> R["Runners evaluate selected outcomes"]
+    R --> H["Informational health indicators"]
+    R -. "Optional input" .-> G["Gates"]
+    G --> D["Allow, block or request review"]
+The end state is not simply agents creating larger pull requests.
+It is a development lifecycle where developers:
+Describe intended outcomes
+Delegate more implementation work
+Preserve how the work happened
+Define evaluations in the repository
+Decide which risks need human judgment
+Review intent, evidence, and outcomes
+The developer remains in control of the harness.
+Act 4: Infrastructure for many agents
+14. Agents create a different Git workload
+When developers run many agents concurrently, Git usage changes:
+More clones and fetches
+More ephemeral environments
+More parallel branches
+Higher read and write concurrency
+More demand for regional performance
+Entire’s distributed Git network, currently in preview, mirrors repositories into regional cells designed for agent-scale traffic. Developers can continue using GitHub while agents access an Entire mirror. Distributed Git network
+The community framing is larger than performance:
+Git was designed to be distributed. Agentic development gives us an opportunity to make software infrastructure open and distributed again.
+The direction includes an open network, self-hosting, regional control, and an independent Git-compatible foundation.
+Act 5: The invitation
+15. The principles
+Entire is being built around a few beliefs:
+Developers should own their development history
+Context should not be trapped inside one agent vendor
+Code and the context behind it should be versioned together
+Humans and agents should be able to use the same history
+Evaluation should be programmable
+Gates should be optional and configurable
+The platform should remain open, portable, and agent-neutral
+No one has yet figured out the final form of agentic software development
+16. Build it with us
+The community CTA:
+Install the Entire CLI
+Enable it in a real repository
+Use it with your preferred agent
+Inspect your Checkpoints
+Try search, explain, blame, and handoff
+Build an integration for another agent
+Experiment with skills
+Test the Git network
+Break things and report what happened
+Join the Discord and help shape what comes next
+Closing:
+“Agents are going to write more of our code. Developers should still own the context, rules, and infrastructure around how that code gets built.”
+Final slide:
+Use the agent you want. Keep the context. Own your history. Build what comes next.
