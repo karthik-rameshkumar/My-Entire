@@ -68,6 +68,11 @@
       case "f":
       case "F":
         toggleFullscreen(); break;
+      case "b":
+      case "B":
+        document.body.classList.toggle("blackout"); break;
+      case "Escape":
+        document.body.classList.remove("blackout"); break;
     }
   });
 
