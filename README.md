@@ -2,7 +2,7 @@
 
 A presentation about the Developer Platform of the future.
 
-A web-based deck for Entire.io — 23 slides across 5 acts, built with plain HTML/CSS/JS and the Entire brand system (Entire Headline / Entire Mono, `#f25533` accent, dark neutrals).
+A web-based deck for Entire.io — 19 slides across 3 acts plus a closing invitation, built with plain HTML/CSS/JS and the Entire brand system (Entire Headline / Entire Mono, `#f25533` accent, dark neutrals). Sized for a 30–40 minute talk with a live demo in the middle.
 
 ## Presenting
 
@@ -21,6 +21,7 @@ python -m http.server 8000
 | `←` `↑` `PgUp` | previous slide |
 | `Home` / `End` | first / last slide |
 | `F` | toggle fullscreen |
+| `B` | toggle blackout (blank screen while demoing; `Esc` also clears) |
 | click right/left edge | next / previous |
 
 The URL hash tracks the current slide (`#12`), so a refresh keeps your place.
