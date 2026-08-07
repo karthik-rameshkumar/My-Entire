@@ -3,3 +3,7 @@ I am attending a different conference now, so I need to change the nexuscon logo
 ---
 
 On slide 4, the animation for the image on the left appears rather slowly. fix it
+
+---
+
+commit this
