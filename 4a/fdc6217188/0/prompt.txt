@@ -1,0 +1,5 @@
+I am attending a different conference now, so I need to change the nexuscon logo into something else. use this one [Image #1]
+
+---
+
+On slide 4, the animation for the image on the left appears rather slowly. fix it
