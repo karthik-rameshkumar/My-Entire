@@ -133,6 +133,11 @@ html, body {
   width: 26px; height: 26px; opacity: 0.5;
 }
 .hud-mark img { width: 100%; height: 100%; display: block; }
+.hud-conf {
+  position: fixed; z-index: 40; top: 1.5rem; left: 1.8rem;
+  height: 46px; opacity: 0.85;
+}
+.hud-conf img { height: 100%; width: auto; display: block; }
 
 /* ============================================================
    Slides
@@ -348,7 +353,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .s-act .sub { margin-top: 0.8rem; }
 
 /* ============================================================
-   Slide 3 — Terminal (agent forgot everything)
+   Slide 4 — Terminal (agent forgot everything)
    ============================================================ */
 .s-forgot .cols { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 3.4rem; align-items: center; }
 
@@ -373,7 +378,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .term-body { padding: 1rem 1.2rem 1.2rem; min-height: 15.5rem; }
 .term-body .ln { white-space: pre-wrap; opacity: 0; }
 .slide.active .term-body .ln {
-  animation: term-ln 0.35s ease-out both;
+  animation: term-ln 0.28s ease-out both;
   animation-delay: calc(var(--t) * 1ms);
 }
 @keyframes term-ln { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
@@ -384,10 +389,10 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .ln .mut { color: var(--text-dim); }
 
 /* session 1 fades to ghost as session 2 appears */
-.slide.active .term-session1 { animation: term-ghost 1.2s var(--ease-out) both; animation-delay: 6.4s; }
+.slide.active .term-session1 { animation: term-ghost 0.8s var(--ease-out) both; animation-delay: 3.35s; }
 @keyframes term-ghost { to { opacity: 0.28; filter: blur(1px) grayscale(0.5); transform: scale(0.975) translateY(-6px); } }
 .term-session2 { margin-top: -8.2rem; position: relative; opacity: 0; transform: translateY(24px); }
-.slide.active .term-session2 { animation: term-new 0.9s var(--ease-out) both; animation-delay: 6.9s; }
+.slide.active .term-session2 { animation: term-new 0.6s var(--ease-out) both; animation-delay: 3.6s; }
 @keyframes term-new { to { opacity: 1; transform: none; } }
 .term-session2 .term-body { min-height: 7rem; }
 .cursor {
@@ -407,7 +412,23 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .forgot-punch strong { color: var(--text); }
 
 /* ============================================================
-   Slide 4 — git result vs process
+   Slide 3 — context analogy bridge
+   ============================================================ */
+.analogy-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; margin-top: 2.4rem;
+}
+.analogy-punch {
+  margin-top: 2.6rem;
+  font-family: var(--font-headline); font-weight: 600;
+  font-size: clamp(1.3rem, 2.1vw, 1.9rem);
+  line-height: 1.3; text-wrap: balance;
+  color: var(--text-muted);
+}
+.analogy-punch strong { color: var(--text); }
+
+/* ============================================================
+   Slide 5 — git result vs process
    ============================================================ */
 .s-git .cols { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 2.2rem; margin-top: 2.2rem; align-items: stretch; }
 .git-panel { font-family: var(--font-mono); font-size: 0.82rem; line-height: 2.05; }
@@ -438,7 +459,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .pull-quote .accent { font-style: italic; }
 
 /* ============================================================
-   Slide 5 — fragmentation
+   Slide 6 — fragmentation
    ============================================================ */
 .agent-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin: 2.6rem 0 2.4rem; }
 .agent-tile {
@@ -464,7 +485,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .frag-a { margin-top: 1.1rem; }
 
 /* ============================================================
-   Slide 7 — Meet Entire (checkpoint graph)
+   Slide 8 — Meet Entire (checkpoint graph)
    ============================================================ */
 .ckpt-scene { margin-top: 2.6rem; position: relative; }
 .ckpt-rail { position: relative; height: 210px; }
@@ -510,7 +531,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .meet-line { margin-top: 2.2rem; }
 
 /* ============================================================
-   Slide 8 — how it works
+   Slide 9 — how it works
    ============================================================ */
 .arch { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.6rem; align-items: center; margin-top: 2.4rem; }
 .arch-col { display: flex; flex-direction: column; gap: 0.85rem; }
@@ -544,7 +565,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .arch-note { margin-top: 2rem; }
 
 /* ============================================================
-   Slide 9 — capabilities grid
+   Slide 10 — capabilities grid
    ============================================================ */
 .cap-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -567,7 +588,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .cap-wide { grid-column: span 1; }
 
 /* ============================================================
-   Slide 10 — what Entire is not
+   Slide 11 — what Entire is not
    ============================================================ */
 .not-list { list-style: none; margin-top: 2.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 2.4rem; }
 .not-list li {
@@ -586,7 +607,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 }
 
 /* ============================================================
-   Slide 11 — live demo
+   Slide 12 — live demo
    ============================================================ */
 .s-demo { text-align: center; }
 .demo-steps {
@@ -612,7 +633,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .demo-land .accent { display: inline; }
 
 /* ============================================================
-   Slide 13 — progression
+   Slide 14 — progression
    ============================================================ */
 .prog { display: flex; align-items: center; gap: 0; margin: 3.2rem 0 2.6rem; }
 .prog-step { flex: 1; text-align: center; position: relative; }
@@ -637,7 +658,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .prog-step.done .p-name { color: var(--text); }
 
 /* ============================================================
-   Slide 14 — Trails / Runners / Gates
+   Slide 15 — Trails / Runners / Gates
    ============================================================ */
 .prim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
 .prim {
@@ -665,7 +686,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .prim-foot strong { color: var(--text-muted); font-weight: 560; }
 
 /* ============================================================
-   Slide 15 — concrete example
+   Slide 16 — concrete example
    ============================================================ */
 .trail-card {
   margin-top: 2.2rem;
@@ -710,7 +731,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .concrete-line { margin-top: 2rem; font-family: var(--font-headline); font-weight: 600; font-size: clamp(1.3rem, 2.1vw, 1.9rem); }
 
 /* ============================================================
-   Slide 16 — git network
+   Slide 17 — git network
    ============================================================ */
 .s-network .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 1.4rem; }
 .net-scene { position: relative; height: 420px; }
@@ -742,7 +763,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .preview-chip { margin-left: 0.8rem; vertical-align: middle; font-size: 0.62rem; }
 
 /* ============================================================
-   Slide 17 — principles
+   Slide 18 — principles
    ============================================================ */
 .princ-list { list-style: none; margin-top: 2.4rem; columns: 2; column-gap: 3.5rem; }
 .princ-list li {
@@ -761,7 +782,37 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .princ-list li strong { color: var(--text); font-weight: 620; }
 
 /* ============================================================
-   Slide 18 — CTA
+   Slide 20 — stay connected (waitlist + LinkedIn)
+   ============================================================ */
+.connect-cols {
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.6rem; margin-top: 2.4rem; align-items: stretch;
+}
+.connect-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem 2.2rem;
+  display: flex; flex-direction: column; gap: 0.9rem;
+}
+.cn-head { font-family: var(--font-headline); font-weight: 620; font-size: clamp(1.15rem, 1.7vw, 1.55rem); }
+.cn-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-width: 40ch; }
+.cn-body strong { color: var(--text); }
+.cn-url {
+  margin-top: auto; padding-top: 1rem;
+  font-family: var(--font-mono); font-weight: 700;
+  font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+  color: var(--accent); letter-spacing: -0.02em;
+}
+.cn-url .cn-arrow { font-size: 0.6em; vertical-align: 0.25em; }
+.cn-qr {
+  width: min(230px, 26vh); border-radius: 12px;
+  align-self: center; margin-top: auto;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.4);
+}
+
+/* ============================================================
+   Slide 19 — CTA
    ============================================================ */
 .s-cta .cols { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3.2rem; align-items: center; }
 .cta-term { font-size: 0.78rem; }
@@ -775,7 +826,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .cta-list li strong { color: var(--text); font-weight: 560; }
 
 /* ============================================================
-   Slide 19 — Kannada thank you
+   Slide 21 — Kannada thank you
    ============================================================ */
 .s-close { text-align: center; }
 .close-layout { position: relative; display: flex; flex-direction: column; align-items: center; }

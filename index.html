@@ -13,6 +13,7 @@
 <div class="stage-glow"></div>
 
 <div class="hud-mark"><img src="assets/mark.svg" alt=""></div>
+<div class="hud-conf"><img src="assets/futureforgelogo-light.png" alt="FutureForge"></div>
 <div class="hud hud-act" id="hudAct"></div>
 <div class="hud hud-counter" id="hudCounter"></div>
 <div class="progress" id="progress"></div>
@@ -57,7 +58,22 @@
     </div>
   </section>
 
-  <!-- 3 · Your agent forgot everything -->
+  <!-- 3 · Context is the real skill (analogy bridge) -->
+  <section class="slide s-analogy" data-act="Act 1 · The developer problem">
+    <div class="wrap">
+      <p class="kicker" data-animate style="--i:0">The developer problem</p>
+      <h2 data-animate style="--i:1">Think of the best engineer<br>you’ve ever worked with</h2>
+      <p class="sub" data-animate style="--i:2">What makes them irreplaceable was never typing speed.</p>
+      <div class="analogy-grid">
+        <div class="cap" data-animate style="--i:3"><span class="c-ico">◆</span><p class="c-t">They know why</p><p class="c-d">Why the auth flow is weird. Why that dependency is pinned. Which “obvious fix” is a trap.</p></div>
+        <div class="cap" data-animate style="--i:4"><span class="c-ico">✗</span><p class="c-t">They remember dead ends</p><p class="c-d">What was tried last quarter and rolled back — so nobody pays for the same lesson twice.</p></div>
+        <div class="cap" data-animate style="--i:5"><span class="c-ico">›</span><p class="c-t">They carry your corrections</p><p class="c-d">Told once, remembered. Your conventions, your constraints, your taste.</p></div>
+      </div>
+      <p class="analogy-punch" data-fragment>Now imagine they lose all of it <strong>every single night</strong>.<br>Same skill — <span class="accent">a fraction of the engineer.</span> That’s the deal we’ve accepted with coding agents.</p>
+    </div>
+  </section>
+
+  <!-- 4 · Your agent forgot everything -->
   <section class="slide s-forgot" data-act="Act 1 · The developer problem">
     <div class="wrap">
       <div class="cols">
@@ -68,15 +84,15 @@
               <span class="tb-title">agent A · session 1 · tuesday, 2:14 pm</span>
             </div>
             <div class="term-body">
-              <div class="ln" style="--t:400"><span class="p">❯</span> refactor the rate limiter to sliding windows</div>
-              <div class="ln" style="--t:1100"><span class="tool">●</span> Explored <span class="mut">src/middleware/ratelimit.ts</span> +4 files</div>
-              <div class="ln" style="--t:1800"><span class="tool">●</span> Ran 34 tools · read 6 test suites</div>
-              <div class="ln" style="--t:2600"><span class="warn">◆</span> Constraint: Redis cluster (no multi-key ops)</div>
-              <div class="ln" style="--t:3300"><span class="warn">◆</span> Constraint: public API must stay frozen</div>
-              <div class="ln" style="--t:4000"><span class="mut">✗ Attempt 1: Lua script, rejected in cluster mode</span></div>
-              <div class="ln" style="--t:4700"><span class="p">›</span> You: <span class="mut">“keep the token-bucket fallback”</span></div>
-              <div class="ln" style="--t:5400"><span class="ok">✓</span> Sliding window + fallback · 42 tests green</div>
-              <div class="ln" style="--t:6000"><span class="ok">✓</span> Committed <span class="mut">a3f9c12</span></div>
+              <div class="ln" style="--t:200"><span class="p">❯</span> refactor the rate limiter to sliding windows</div>
+              <div class="ln" style="--t:550"><span class="tool">●</span> Explored <span class="mut">src/middleware/ratelimit.ts</span> +4 files</div>
+              <div class="ln" style="--t:900"><span class="tool">●</span> Ran 34 tools · read 6 test suites</div>
+              <div class="ln" style="--t:1250"><span class="warn">◆</span> Constraint: Redis cluster (no multi-key ops)</div>
+              <div class="ln" style="--t:1600"><span class="warn">◆</span> Constraint: public API must stay frozen</div>
+              <div class="ln" style="--t:1950"><span class="mut">✗ Attempt 1: Lua script, rejected in cluster mode</span></div>
+              <div class="ln" style="--t:2300"><span class="p">›</span> You: <span class="mut">“keep the token-bucket fallback”</span></div>
+              <div class="ln" style="--t:2650"><span class="ok">✓</span> Sliding window + fallback · 42 tests green</div>
+              <div class="ln" style="--t:3000"><span class="ok">✓</span> Committed <span class="mut">a3f9c12</span></div>
             </div>
           </div>
           <div class="term term-session2 card-floating">
@@ -85,8 +101,8 @@
               <span class="tb-title">agent B · session 1 · next monday</span>
             </div>
             <div class="term-body">
-              <div class="ln" style="--t:7600"><span class="mut">context: empty · memory: none · history: none</span></div>
-              <div class="ln" style="--t:8200"><span class="p">❯</span> <span class="cursor"></span></div>
+              <div class="ln" style="--t:3900"><span class="mut">context: empty · memory: none · history: none</span></div>
+              <div class="ln" style="--t:4250"><span class="p">❯</span> <span class="cursor"></span></div>
             </div>
           </div>
         </div>
@@ -100,7 +116,7 @@
     </div>
   </section>
 
-  <!-- 4 · Git stores the result, not the process -->
+  <!-- 5 · Git stores the result, not the process -->
   <section class="slide s-git" data-act="Act 1 · The developer problem">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer problem</p>
@@ -131,7 +147,7 @@
     </div>
   </section>
 
-  <!-- 5 · Agent history is fragmented -->
+  <!-- 6 · Agent history is fragmented -->
   <section class="slide" data-act="Act 1 · The developer problem">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer problem</p>
@@ -164,7 +180,7 @@
     </div>
   </section>
 
-  <!-- 6 · Act 2 divider -->
+  <!-- 7 · Act 2 divider -->
   <section class="slide s-act" data-act="Act 2 · Entire today">
     <div class="wrap">
       <div class="act-num" data-n="02" data-animate style="--i:0">02</div>
@@ -174,7 +190,7 @@
     </div>
   </section>
 
-  <!-- 7 · Meet Entire -->
+  <!-- 8 · Meet Entire -->
   <section class="slide" data-act="Act 2 · Entire today">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
@@ -209,7 +225,7 @@
     </div>
   </section>
 
-  <!-- 8 · How it works -->
+  <!-- 9 · How it works -->
   <section class="slide" data-act="Act 2 · Entire today">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
@@ -245,7 +261,7 @@
     </div>
   </section>
 
-  <!-- 9 · What this lets you do today -->
+  <!-- 10 · What this lets you do today -->
   <section class="slide" data-act="Act 2 · Entire today">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
@@ -261,7 +277,7 @@
     </div>
   </section>
 
-  <!-- 10 · What Entire is not -->
+  <!-- 11 · What Entire is not -->
   <section class="slide" data-act="Act 2 · Entire today">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
@@ -276,7 +292,7 @@
     </div>
   </section>
 
-  <!-- 11 · Live demo -->
+  <!-- 12 · Live demo -->
   <section class="slide s-demo" data-act="Act 2 · Entire today">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0; justify-content:center">Live demo</p>
@@ -293,7 +309,7 @@
     </div>
   </section>
 
-  <!-- 12 · Act 3 divider -->
+  <!-- 13 · Act 3 divider -->
   <section class="slide s-act" data-act="Act 3 · The developer harness">
     <div class="wrap">
       <div class="act-num" data-n="03" data-animate style="--i:0">03</div>
@@ -302,7 +318,7 @@
     </div>
   </section>
 
-  <!-- 13 · Foundation, not destination -->
+  <!-- 14 · Foundation, not destination -->
   <section class="slide" data-act="Act 3 · The developer harness">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer harness</p>
@@ -319,7 +335,7 @@
     </div>
   </section>
 
-  <!-- 14 · Trails, Runners, Gates -->
+  <!-- 15 · Trails, Runners, Gates -->
   <section class="slide" data-act="Act 3 · The developer harness">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer harness</p>
@@ -360,7 +376,7 @@
     </div>
   </section>
 
-  <!-- 15 · Make it concrete -->
+  <!-- 16 · Make it concrete -->
   <section class="slide" data-act="Act 3 · The developer harness">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer harness</p>
@@ -393,7 +409,7 @@
     </div>
   </section>
 
-  <!-- 16 · Distributed Git network -->
+  <!-- 17 · Distributed Git network -->
   <section class="slide s-network" data-act="Act 3 · The developer harness">
     <div class="wrap">
       <div class="cols">
@@ -454,7 +470,7 @@
     </div>
   </section>
 
-  <!-- 17 · The principles -->
+  <!-- 18 · The principles -->
   <section class="slide" data-act="The invitation">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The invitation</p>
@@ -469,7 +485,7 @@
     </div>
   </section>
 
-  <!-- 18 · Build it with us -->
+  <!-- 19 · Build it with us -->
   <section class="slide s-cta" data-act="The invitation">
     <div class="wrap">
       <div class="cols">
@@ -506,7 +522,27 @@
     </div>
   </section>
 
-  <!-- 19 · Thank you -->
+  <!-- 20 · Stay connected -->
+  <section class="slide s-connect" data-act="The invitation">
+    <div class="wrap">
+      <p class="kicker" data-animate style="--i:0">Before you go</p>
+      <h2 data-animate style="--i:1">Two ways to stay in the loop</h2>
+      <div class="connect-cols">
+        <div class="connect-card" data-animate style="--i:2">
+          <p class="cn-head">Join the waitlist</p>
+          <p class="cn-body">Checkpoints are open source today. The platform — Trails, Runners, Gates, and the Git network — is rolling out to the waitlist first.</p>
+          <p class="cn-url">entire.io <span class="cn-arrow">↗</span></p>
+        </div>
+        <div class="connect-card" data-animate style="--i:3">
+          <p class="cn-head">Connect with me</p>
+          <p class="cn-body"><strong>Karthik Rameshkumar</strong> · Field CTO @ Entire<br>Scan to say hello on LinkedIn — questions, feedback, and war stories welcome.</p>
+          <img class="cn-qr" src="assets/linkedin-qr.png" alt="QR code linking to Karthik Rameshkumar's LinkedIn profile">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 · Thank you -->
   <section class="slide s-close" data-act="">
     <div class="wrap close-layout">
       <div class="close-trail" aria-hidden="true" data-animate style="--i:0">

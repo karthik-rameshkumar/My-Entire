@@ -2,7 +2,7 @@
 
 A presentation about the Developer Platform of the future.
 
-A web-based deck for Entire.io — 19 slides across 3 acts plus a closing invitation, built with plain HTML/CSS/JS and the Entire brand system (Entire Headline / Entire Mono, `#f25533` accent, dark neutrals). Sized for a 30–40 minute talk with a live demo in the middle.
+A web-based deck for Entire.io — 21 slides across 3 acts plus a closing invitation, built with plain HTML/CSS/JS and the Entire brand system (Entire Headline / Entire Mono, `#f25533` accent, dark neutrals). Sized for a 30–40 minute talk with a live demo in the middle.
 
 ## Presenting
 
