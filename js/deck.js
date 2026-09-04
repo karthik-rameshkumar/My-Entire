@@ -1,4 +1,86 @@
 /* Entire deck — navigation, fragments, hash routing */
+
+/* Marvin's cameos - he pops into the corner on a few slides, says one
+   thing, and leaves. A slide opts in with data-marvin="mood|line";
+   data-marvin-delay and data-marvin-dwell tune the comic timing. */
+(() => {
+  const hud = document.getElementById("marvinHud");
+  if (!hud) return;
+  const say = hud.querySelector(".marvin-say");
+  const ENTER_MS = 1500;
+  const DWELL_MS = 8000;
+  let enterTimer = null;
+  let exitTimer = null;
+
+  document.addEventListener("deck:slidechange", (e) => {
+    clearTimeout(enterTimer);
+    clearTimeout(exitTimer);
+    hud.classList.remove("is-on");
+
+    const cue = e.detail.slide.dataset.marvin;
+    if (!cue) return;
+    const [mood, line = ""] = cue.split("|");
+    const delay = Number(e.detail.slide.dataset.marvinDelay) || ENTER_MS;
+    const dwell = Number(e.detail.slide.dataset.marvinDwell) || DWELL_MS;
+
+    enterTimer = setTimeout(() => {
+      hud.dataset.mood = mood.trim();
+      say.textContent = line.trim();
+      hud.classList.add("is-on");
+      // the gag is a cameo, not a permanent fixture: he leaves on his own
+      exitTimer = setTimeout(() => hud.classList.remove("is-on"), dwell);
+    }, delay);
+  });
+})();
+
+
+/* Language rotation — the title and closing slides cycle their native lines.
+   Runs only while its slide is on screen and always restarts on Kannada,
+   so the host language is what the room sees first. */
+(() => {
+  const HOLD_MS = 3400;
+
+  const cycles = Array.from(document.querySelectorAll("[data-lang-cycle]")).map((slide) => ({
+    slide,
+    groups: Array.from(slide.querySelectorAll(".lang-cycle"), (el) =>
+      Array.from(el.querySelectorAll(":scope > .lang-line"))
+    ),
+    timer: null,
+    index: 0,
+  }));
+
+  function paint(cycle) {
+    cycle.groups.forEach((lines) => {
+      // shorter groups just hold their last line rather than blanking out
+      const i = Math.min(cycle.index, lines.length - 1);
+      lines.forEach((line, n) => line.classList.toggle("is-current", n === i));
+    });
+  }
+
+  function stop(cycle) {
+    clearInterval(cycle.timer);
+    cycle.timer = null;
+  }
+
+  function start(cycle) {
+    stop(cycle);
+    cycle.index = 0;
+    paint(cycle);
+    const count = Math.max(0, ...cycle.groups.map((lines) => lines.length));
+    if (count < 2) return;
+    cycle.timer = setInterval(() => {
+      cycle.index = (cycle.index + 1) % count;
+      paint(cycle);
+    }, HOLD_MS);
+  }
+
+  cycles.forEach(paint);
+
+  document.addEventListener("deck:slidechange", (e) => {
+    cycles.forEach((cycle) => (cycle.slide === e.detail.slide ? start(cycle) : stop(cycle)));
+  });
+})();
+
 (() => {
   const slides = Array.from(document.querySelectorAll(".slide"));
   const progress = document.getElementById("progress");
@@ -34,6 +116,7 @@
     const act = slide.dataset.act || "";
     hudAct.innerHTML = act ? act.replace(/^(Act \d+)/, "<em>$1</em>") : "";
     history.replaceState(null, "", `#${n + 1}`);
+    document.dispatchEvent(new CustomEvent("deck:slidechange", { detail: { slide, index: n } }));
   }
 
   function next() {

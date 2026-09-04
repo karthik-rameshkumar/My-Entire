@@ -13,22 +13,71 @@
 <div class="stage-glow"></div>
 
 <div class="hud-mark"><img src="assets/mark.svg" alt=""></div>
-<div class="hud-conf"><img src="assets/futureforgelogo-light.png" alt="FutureForge"></div>
+<div class="hud-conf"><img src="assets/agentsnexuslogo-light.png" alt="AgentsNexus"></div>
 <div class="hud hud-act" id="hudAct"></div>
 <div class="hud hud-counter" id="hudCounter"></div>
 <div class="progress" id="progress"></div>
 
+<!-- Marvin's cameos. Each slide opts in with data-marvin="mood|line" -->
+<div class="marvin-hud" id="marvinHud" aria-hidden="true">
+  <p class="marvin-say"></p>
+  <span class="marvin-cameo">
+    <svg class="marvin-svg" viewBox="0 0 120 68">
+      <defs>
+        <linearGradient id="mv-body" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1d3f4e"/>
+          <stop offset="1" stop-color="#0d1f28"/>
+        </linearGradient>
+      </defs>
+      <rect class="mv-chin" x="51" y="52" width="18" height="10" rx="3"/>
+      <rect class="mv-face" x="3" y="4" width="114" height="52" rx="21"/>
+      <circle class="mv-eye mv-eye-l" cx="45" cy="30" r="11"/>
+      <rect class="mv-eye mv-eye-r" x="66" y="25" width="26" height="10" rx="5"/>
+      <rect class="mv-shades" x="12" y="18" width="96" height="21" rx="8"/>
+    </svg>
+    <b class="mv-emote"></b>
+  </span>
+</div>
+
+
 <main class="deck" id="deck">
 
   <!-- 1 · Title -->
-  <section class="slide s-title" data-act="">
+  <section class="slide s-title" data-act="" data-lang-cycle>
     <div class="wrap title-layout">
       <div class="title-copy">
         <img class="logo" src="assets/logo.svg" alt="Entire" data-animate style="--i:0">
-        <p class="title-location" data-animate style="--i:1"><span>ಬೆಂಗಳೂರು</span> · BENGALURU</p>
-        <h1 lang="kn" data-animate style="--i:2">ಕೋಡ್ ಮತ್ತು ಅದರ ಸಂದರ್ಭ,<br><strong>ಒಟ್ಟಿಗೆ ಆವೃತ್ತಿಗೊಳಿಸಲಾಗಿದೆ.</strong></h1>
-        <p class="title-translation" data-animate style="--i:3">Code and its context, <strong>versioned together.</strong></p>
-        <p class="title-tagline" data-animate style="--i:4">The developer platform for the agentic era · <em>entire.io</em></p>
+        <p class="title-location" data-animate style="--i:1"><span class="lang-cycle"><span class="lang-line" lang="kn">ಬೆಂಗಳೂರು</span><span class="lang-line" lang="ta">பெங்களூரு</span><span class="lang-line" lang="te">బెంగళూరు</span><span class="lang-line" lang="ml">ബെംഗളൂരു</span><span class="lang-line" lang="hi">बेंगलुरु</span><span class="lang-line" lang="mr">बेंगळुरू</span><span class="lang-line" lang="bn">বেঙ্গালুরু</span><span class="lang-line" lang="gu">બેંગલુરુ</span><span class="lang-line" lang="pa">ਬੈਂਗਲੁਰੂ</span><span class="lang-line" lang="or">ବେଙ୍ଗାଲୁରୁ</span><span class="lang-line" lang="ur">بنگلورو</span></span> · BENGALURU</p>
+        <h1 class="lang-cycle" data-animate style="--i:2">
+          <span class="lang-line" lang="kn">ಏಜೆಂಟ್ ಯುಗಕ್ಕಾಗಿ,<br><strong>ಡೆವಲಪರ್ ವೇದಿಕೆ.</strong></span>
+          <span class="lang-line" lang="ta">ஏஜென்ட் யுகத்தின்,<br><strong>டெவலப்பர் தளம்.</strong></span>
+          <span class="lang-line" lang="te">ఏజెంట్ యుగం కోసం,<br><strong>డెవలపర్ వేదిక.</strong></span>
+          <span class="lang-line" lang="ml">ഏജന്റ് യുഗത്തിന്,<br><strong>ഡെവലപ്പർ വേദി.</strong></span>
+          <span class="lang-line" lang="hi">एजेंट युग का,<br><strong>डेवलपर प्लेटफ़ॉर्म।</strong></span>
+          <span class="lang-line" lang="mr">एजंट युगाचे,<br><strong>डेव्हलपर प्लॅटफॉर्म.</strong></span>
+          <span class="lang-line" lang="bn">এজেন্ট যুগের,<br><strong>ডেভেলপার প্ল্যাটফর্ম।</strong></span>
+          <span class="lang-line" lang="gu">એજન્ટ યુગનું,<br><strong>ડેવલપર પ્લેટફોર્મ.</strong></span>
+          <span class="lang-line" lang="pa">ਏਜੰਟ ਯੁੱਗ ਦਾ,<br><strong>ਡਿਵੈਲਪਰ ਪਲੇਟਫਾਰਮ।</strong></span>
+          <span class="lang-line" lang="or">ଏଜେଣ୍ଟ ଯୁଗର,<br><strong>ଡେଭଲପର ପ୍ଲାଟଫର୍ମ।</strong></span>
+          <span class="lang-line" lang="ur" dir="rtl">ایجنٹ دور کا،<br><strong>ڈویلپر پلیٹ فارم۔</strong></span>
+        </h1>
+        <p class="title-translation" data-animate style="--i:3">The developer platform for the <strong>agent era.</strong></p>
+        <p class="lang-tag" data-animate style="--i:4">
+          <span class="lang-cycle">
+            <span class="lang-line" lang="kn"><span class="lang-native">ಕನ್ನಡ</span> · Kannada</span>
+            <span class="lang-line" lang="ta"><span class="lang-native">தமிழ்</span> · Tamil</span>
+            <span class="lang-line" lang="te"><span class="lang-native">తెలుగు</span> · Telugu</span>
+            <span class="lang-line" lang="ml"><span class="lang-native">മലയാളം</span> · Malayalam</span>
+            <span class="lang-line" lang="hi"><span class="lang-native">हिन्दी</span> · Hindi</span>
+            <span class="lang-line" lang="mr"><span class="lang-native">मराठी</span> · Marathi</span>
+            <span class="lang-line" lang="bn"><span class="lang-native">বাংলা</span> · Bengali</span>
+            <span class="lang-line" lang="gu"><span class="lang-native">ગુજરાતી</span> · Gujarati</span>
+            <span class="lang-line" lang="pa"><span class="lang-native">ਪੰਜਾਬੀ</span> · Punjabi</span>
+            <span class="lang-line" lang="or"><span class="lang-native">ଓଡ଼ିଆ</span> · Odia</span>
+            <span class="lang-line" lang="ur"><span class="lang-native">اردو</span> · Urdu</span>
+          </span>
+        </p>
+        <p class="title-tagline" data-animate style="--i:5">Code and its context, versioned together · <em>entire.io</em></p>
       </div>
 
       <div class="title-visual" aria-label="Marvin following a trail of versioned checkpoints" data-animate style="--i:2">
@@ -74,7 +123,7 @@
   </section>
 
   <!-- 4 · Your agent forgot everything -->
-  <section class="slide s-forgot" data-act="Act 1 · The developer problem">
+  <section class="slide s-forgot" data-act="Act 1 · The developer problem" data-marvin="blank|have we met?">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -102,7 +151,8 @@
             </div>
             <div class="term-body">
               <div class="ln" style="--t:3900"><span class="mut">context: empty · memory: none · history: none</span></div>
-              <div class="ln" style="--t:4250"><span class="p">❯</span> <span class="cursor"></span></div>
+              <div class="ln" style="--t:4250"><span class="tool">●</span> <span class="mut">“Sure! Happy to help. What are we working on?”</span></div>
+              <div class="ln" style="--t:4600"><span class="p">❯</span> <span class="cursor"></span></div>
             </div>
           </div>
         </div>
@@ -117,7 +167,7 @@
   </section>
 
   <!-- 5 · Git stores the result, not the process -->
-  <section class="slide s-git" data-act="Act 1 · The developer problem">
+  <section class="slide s-git" data-act="Act 1 · The developer problem" data-marvin="confused|so... why though?">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer problem</p>
       <h2 data-animate style="--i:1">Git stores the result, not the process</h2>
@@ -191,7 +241,7 @@
   </section>
 
   <!-- 8 · Meet Entire -->
-  <section class="slide" data-act="Act 2 · Entire today">
+  <section class="slide" data-act="Act 2 · Entire today" data-marvin="happy|i remember now.">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
       <h2 data-animate style="--i:1">Meet Entire</h2>
@@ -278,7 +328,7 @@
   </section>
 
   <!-- 11 · What Entire is not -->
-  <section class="slide" data-act="Act 2 · Entire today">
+  <section class="slide" data-act="Act 2 · Entire today" data-marvin="smug|not a dashboard.">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
       <h2 data-animate style="--i:1">What Entire is <em>not</em></h2>
@@ -287,13 +337,15 @@
         <li data-animate style="--i:3"><span class="x">✗</span><s>A model proxy</s></li>
         <li data-animate style="--i:4"><span class="x">✗</span><s>A prompt manager</s></li>
         <li data-animate style="--i:5"><span class="x">✗</span><s>A generic chat archive</s></li>
+        <li data-animate style="--i:6"><span class="x">✗</span><s>Yet another MCP server</s></li>
+        <li data-animate style="--i:7"><span class="x">✗</span><s>A dashboard you’ll open twice</s></li>
       </ul>
-      <p class="is-line" data-animate style="--i:6">Entire sits <span class="accent">across agents</span> and connects their work to durable development history.</p>
+      <p class="is-line" data-animate style="--i:8">Entire sits <span class="accent">across agents</span> and connects their work to durable development history.</p>
     </div>
   </section>
 
   <!-- 12 · Live demo -->
-  <section class="slide s-demo" data-act="Act 2 · Entire today">
+  <section class="slide s-demo" data-act="Act 2 · Entire today" data-marvin="panic|demo gods, be cool." data-marvin-delay="700">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0; justify-content:center">Live demo</p>
       <h2 data-animate style="--i:1">Watch the context survive</h2>
@@ -377,7 +429,7 @@
   </section>
 
   <!-- 16 · Make it concrete -->
-  <section class="slide" data-act="Act 3 · The developer harness">
+  <section class="slide" data-act="Act 3 · The developer harness" data-marvin="smug|not at 5pm on a friday.">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer harness</p>
       <h2 data-animate style="--i:1">Make it concrete</h2>
@@ -403,6 +455,11 @@
             <span class="r-q">Does it perform better under the expected load?</span>
             <span class="verdict verdict-review">uncertain → review</span>
           </div>
+          <div class="runner-row">
+            <span class="r-name"><span class="accent">▷</span> friday-5pm</span>
+            <span class="r-q">Would <em>you</em> merge this at 5pm on a Friday?</span>
+            <span class="verdict verdict-review">uncertain → review</span>
+          </div>
         </div>
       </div>
       <p class="concrete-line" data-animate style="--i:3">Entire doesn’t decide what “good” means. <span class="accent">The developer defines it</span>, and stays in control of the harness.</p>
@@ -410,7 +467,7 @@
   </section>
 
   <!-- 17 · Distributed Git network -->
-  <section class="slide s-network" data-act="Act 3 · The developer harness">
+  <section class="slide s-network" data-act="Act 3 · The developer harness" data-marvin="shades|faster than the ORR at 6pm.">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -486,7 +543,7 @@
   </section>
 
   <!-- 19 · Build it with us -->
-  <section class="slide s-cta" data-act="The invitation">
+  <section class="slide s-cta" data-act="The invitation" data-marvin="happy|see you in the repo.">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -515,7 +572,8 @@
             <div class="ln" style="--t:2400"><span class="ok">✓</span> checkpoints active · agent sessions will be preserved</div>
             <div class="ln" style="--t:3000">&nbsp;</div>
             <div class="ln" style="--t:3000"><span class="mut"># then just work</span></div>
-            <div class="ln" style="--t:3300"><span class="p">❯</span> <span class="cursor"></span></div>
+            <div class="ln" style="--t:3300"><span class="mut"># that’s the whole setup · no dashboard to configure</span></div>
+            <div class="ln" style="--t:3600"><span class="p">❯</span> <span class="cursor"></span></div>
           </div>
         </div>
       </div>
@@ -543,7 +601,7 @@
   </section>
 
   <!-- 21 · Thank you -->
-  <section class="slide s-close" data-act="">
+  <section class="slide s-close" data-act="" data-lang-cycle>
     <div class="wrap close-layout">
       <div class="close-trail" aria-hidden="true" data-animate style="--i:0">
         <span class="close-path"></span>
@@ -557,11 +615,50 @@
         <img class="marvin" src="assets/marvin-face.png" alt="Marvin">
         <span class="marvin-wave" aria-hidden="true">⌁</span>
       </div>
-      <p class="close-eyebrow" data-animate style="--i:2">ಇದು ವಿದಾಯವಲ್ಲ · THIS IS A CHECKPOINT</p>
-      <h2 lang="kn" data-animate style="--i:3">ಧನ್ಯವಾದಗಳು, <strong>ಬೆಂಗಳೂರು!</strong></h2>
-      <p class="close-kannada" lang="kn" data-animate style="--i:4">ನಿಮ್ಮ ಕೋಡ್. ನಿಮ್ಮ ಸಂದರ್ಭ. <strong>ನಿಮ್ಮ ಇತಿಹಾಸ.</strong></p>
+      <p class="close-eyebrow" data-animate style="--i:2"><span class="lang-cycle"><span class="lang-line" lang="kn">ಇದು ವಿದಾಯವಲ್ಲ</span><span class="lang-line" lang="ta">இது விடைபெறுதல் அல்ல</span><span class="lang-line" lang="te">ఇది వీడ్కోలు కాదు</span><span class="lang-line" lang="ml">ഇതൊരു വിടപറയലല്ല</span><span class="lang-line" lang="hi">यह अलविदा नहीं है</span><span class="lang-line" lang="mr">हा निरोप नाही</span><span class="lang-line" lang="bn">এটা বিদায় নয়</span><span class="lang-line" lang="gu">આ વિદાય નથી</span><span class="lang-line" lang="pa">ਇਹ ਵਿਦਾਇਗੀ ਨਹੀਂ</span><span class="lang-line" lang="or">ଏହା ବିଦାୟ ନୁହେଁ</span><span class="lang-line" lang="ur">یہ الوداع نہیں</span></span> · THIS IS A CHECKPOINT</p>
+      <h2 class="lang-cycle" data-animate style="--i:3">
+        <span class="lang-line" lang="kn">ಧನ್ಯವಾದಗಳು, <strong>ಬೆಂಗಳೂರು!</strong></span>
+        <span class="lang-line" lang="ta">நன்றி, <strong>பெங்களூரு!</strong></span>
+        <span class="lang-line" lang="te">ధన్యవాదాలు, <strong>బెంగళూరు!</strong></span>
+        <span class="lang-line" lang="ml">നന്ദി, <strong>ബെംഗളൂരു!</strong></span>
+        <span class="lang-line" lang="hi">धन्यवाद, <strong>बेंगलुरु!</strong></span>
+        <span class="lang-line" lang="mr">धन्यवाद, <strong>बेंगळुरू!</strong></span>
+        <span class="lang-line" lang="bn">ধন্যবাদ, <strong>বেঙ্গালুরু!</strong></span>
+        <span class="lang-line" lang="gu">આભાર, <strong>બેંગલુરુ!</strong></span>
+        <span class="lang-line" lang="pa">ਧੰਨਵਾਦ, <strong>ਬੈਂਗਲੁਰੂ!</strong></span>
+        <span class="lang-line" lang="or">ଧନ୍ୟବାଦ, <strong>ବେଙ୍ଗାଲୁରୁ!</strong></span>
+        <span class="lang-line" lang="ur" dir="rtl">شکریہ، <strong>بنگلورو!</strong></span>
+      </h2>
+      <p class="close-native lang-cycle" data-animate style="--i:4">
+        <span class="lang-line" lang="kn">ನಿಮ್ಮ ಕೋಡ್. ನಿಮ್ಮ ಸಂದರ್ಭ. <strong>ನಿಮ್ಮ ಇತಿಹಾಸ.</strong></span>
+        <span class="lang-line" lang="ta">உங்கள் குறியீடு. உங்கள் சூழல். <strong>உங்கள் வரலாறு.</strong></span>
+        <span class="lang-line" lang="te">మీ కోడ్. మీ సందర్భం. <strong>మీ చరిత్ర.</strong></span>
+        <span class="lang-line" lang="ml">നിങ്ങളുടെ കോഡ്. നിങ്ങളുടെ സന്ദർഭം. <strong>നിങ്ങളുടെ ചരിത്രം.</strong></span>
+        <span class="lang-line" lang="hi">आपका कोड. आपका संदर्भ. <strong>आपका इतिहास.</strong></span>
+        <span class="lang-line" lang="mr">तुमचा कोड. तुमचा संदर्भ. <strong>तुमचा इतिहास.</strong></span>
+        <span class="lang-line" lang="bn">আপনার কোড। আপনার প্রেক্ষাপট। <strong>আপনার ইতিহাস।</strong></span>
+        <span class="lang-line" lang="gu">તમારો કોડ. તમારો સંદર્ભ. <strong>તમારો ઇતિહાસ.</strong></span>
+        <span class="lang-line" lang="pa">ਤੁਹਾਡਾ ਕੋਡ। ਤੁਹਾਡਾ ਪ੍ਰਸੰਗ। <strong>ਤੁਹਾਡਾ ਇਤਿਹਾਸ।</strong></span>
+        <span class="lang-line" lang="or">ଆପଣଙ୍କ କୋଡ୍। ଆପଣଙ୍କ ପ୍ରସଙ୍ଗ। <strong>ଆପଣଙ୍କ ଇତିହାସ।</strong></span>
+        <span class="lang-line" lang="ur" dir="rtl">آپ کا کوڈ۔ آپ کا سیاق۔ <strong>آپ کی تاریخ۔</strong></span>
+      </p>
       <p class="close-translation" data-animate style="--i:5">Your code. Your context. <strong>Your history.</strong></p>
-      <div class="close-links" data-animate style="--i:6">
+      <p class="lang-tag" data-animate style="--i:6">
+        <span class="lang-cycle">
+          <span class="lang-line" lang="kn"><span class="lang-native">ಕನ್ನಡ</span> · Kannada</span>
+          <span class="lang-line" lang="ta"><span class="lang-native">தமிழ்</span> · Tamil</span>
+          <span class="lang-line" lang="te"><span class="lang-native">తెలుగు</span> · Telugu</span>
+          <span class="lang-line" lang="ml"><span class="lang-native">മലയാളം</span> · Malayalam</span>
+          <span class="lang-line" lang="hi"><span class="lang-native">हिन्दी</span> · Hindi</span>
+          <span class="lang-line" lang="mr"><span class="lang-native">मराठी</span> · Marathi</span>
+          <span class="lang-line" lang="bn"><span class="lang-native">বাংলা</span> · Bengali</span>
+          <span class="lang-line" lang="gu"><span class="lang-native">ગુજરાતી</span> · Gujarati</span>
+          <span class="lang-line" lang="pa"><span class="lang-native">ਪੰਜਾਬੀ</span> · Punjabi</span>
+          <span class="lang-line" lang="or"><span class="lang-native">ଓଡ଼ିଆ</span> · Odia</span>
+          <span class="lang-line" lang="ur"><span class="lang-native">اردو</span> · Urdu</span>
+        </span>
+      </p>
+      <div class="close-links" data-animate style="--i:7">
         <img class="close-logo" src="assets/logo.svg" alt="Entire">
         <span></span>
         <p>entire.io</p>

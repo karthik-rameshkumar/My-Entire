@@ -64,7 +64,18 @@
   --font-headline: "Entire Headline", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Entire Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-kannada: "Noto Sans Kannada", "Nirmala UI", "Tunga", var(--font-sans);
+  /* Per-character fallback: the first family carrying a script's glyphs wins,
+     so one stack covers every language in the opening/closing rotation. */
+  --font-indic:
+    "Noto Sans Kannada", "Noto Sans Tamil", "Noto Sans Telugu", "Noto Sans Malayalam",
+    "Noto Sans Devanagari", "Noto Sans Bengali", "Noto Sans Gujarati",
+    "Noto Sans Gurmukhi", "Noto Sans Oriya", "Noto Nastaliq Urdu",
+    "Nirmala UI", "Tunga",
+    "Kannada Sangam MN", "Tamil Sangam MN", "Telugu Sangam MN", "Malayalam Sangam MN",
+    "Kohinoor Devanagari", "Bangla Sangam MN", "Gujarati Sangam MN",
+    "Gurmukhi MN", "Oriya Sangam MN", "Geeza Pro",
+    "Segoe UI", var(--font-sans);
+  --font-kannada: var(--font-indic);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -135,7 +146,7 @@ html, body {
 .hud-mark img { width: 100%; height: 100%; display: block; }
 .hud-conf {
   position: fixed; z-index: 40; top: 1.5rem; left: 1.8rem;
-  height: 46px; opacity: 0.85;
+  height: 34px; opacity: 0.85;
 }
 .hud-conf img { height: 100%; width: auto; display: block; }
 
@@ -246,12 +257,45 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .quote-mark { color: var(--accent); font-family: var(--font-headline); }
 
 /* ============================================================
+   Rotating language lines (title + closing)
+   Every variant shares one grid cell, so the box is sized by the
+   longest translation and nothing below it shifts as they cycle.
+   ============================================================ */
+.lang-cycle { display: inline-grid; }
+h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
+.lang-cycle > .lang-line {
+  grid-area: 1 / 1;
+  /* grid items default to min-width:auto, which would refuse to wrap the
+     long unbroken Indic words and push the line out of its column */
+  min-width: 0;
+  opacity: 0; visibility: hidden; transform: translateY(0.22em);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out),
+              visibility 0s linear 0.55s;
+}
+.lang-cycle > .lang-line.is-current {
+  opacity: 1; visibility: visible; transform: none; transition-delay: 0s;
+}
+/* Explicit alignment: `start` would flip to the right edge on the RTL variant. */
+.s-title .lang-line { text-align: left; }
+.s-close .lang-line { text-align: center; }
+
+.lang-tag {
+  margin-top: 1.2rem;
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim);
+}
+.lang-tag .lang-native {
+  font-family: var(--font-indic); font-weight: 500; font-size: 1.15em;
+  letter-spacing: 0.02em; text-transform: none; color: var(--accent);
+}
+
+/* ============================================================
    Slide 1 — Title
    ============================================================ */
 .s-title { flex-direction: column; }
 .title-layout {
-  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
-  align-items: center; gap: clamp(3rem, 7vw, 7rem);
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(340px, 0.85fr);
+  align-items: center; gap: clamp(2.5rem, 5vw, 5rem);
 }
 .s-title .logo { width: min(250px, 32vw); margin: 0 0 3rem; display: block; }
 .title-location {
@@ -262,7 +306,7 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 .title-location::before { content: ""; width: 2.4rem; height: 1px; background: var(--accent); }
 .title-location span { color: var(--accent); font-family: var(--font-kannada); letter-spacing: 0.04em; }
 .s-title h1 {
-  font-family: var(--font-kannada); font-size: clamp(2.55rem, 4.75vw, 5rem);
+  font-family: var(--font-indic); font-size: clamp(2.1rem, 3.85vw, 3.3rem);
   color: var(--text-muted); font-weight: 520; line-height: 1.2; letter-spacing: -0.025em;
 }
 .s-title h1 strong { color: var(--text); font-weight: 700; }
@@ -865,16 +909,20 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
   font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700;
   letter-spacing: 0.2em; color: var(--text-dim); margin-bottom: 1rem;
 }
+.close-eyebrow .lang-cycle {
+  font-family: var(--font-indic); font-size: 1.12em; font-weight: 500;
+  letter-spacing: 0.03em; color: var(--accent);
+}
 .s-close h2 {
   font-family: var(--font-kannada); font-size: clamp(3rem, 6vw, 6.5rem); line-height: 1.1;
   margin: 0; color: var(--text); font-weight: 680; letter-spacing: -0.025em;
 }
 .s-close h2 strong { color: var(--accent); font-weight: 720; }
-.close-kannada {
+.close-native {
   font-family: var(--font-kannada); font-size: clamp(1.25rem, 2.1vw, 2rem);
   color: var(--text-muted); margin-top: 1.3rem; line-height: 1.45;
 }
-.close-kannada strong { color: var(--text); }
+.close-native strong { color: var(--text); }
 .close-translation { margin-top: 0.5rem; color: var(--text-dim); font-size: 0.95rem; }
 .close-translation strong { color: var(--text-muted); font-weight: 600; }
 .close-links {
@@ -897,10 +945,96 @@ h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); margin-bottom: 1.2rem; }
 }
 
 /* ============================================================
+   Marvin's cameos — a corner appearance on a handful of slides.
+   Mood comes from the slide's data-marvin; the face is the same
+   visor as assets/marvin-face.png, redrawn so the eyes can act.
+   ============================================================ */
+.marvin-hud {
+  position: fixed; z-index: 45; right: 1.8rem; bottom: 3.6rem;
+  display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem;
+  pointer-events: none;
+  opacity: 0; visibility: hidden; transform: translateY(14px) scale(0.85);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out),
+              visibility 0s linear 0.45s;
+}
+.marvin-hud.is-on {
+  opacity: 1; visibility: visible; transform: none; transition-delay: 0s;
+}
+
+.marvin-cameo {
+  position: relative; display: block; width: 64px; flex: none;
+  animation: marvin-float 4.5s ease-in-out infinite;
+}
+.marvin-svg {
+  width: 100%; display: block;
+  filter: drop-shadow(0 6px 18px rgba(81, 162, 255, 0.32));
+  transition: transform 0.4s var(--ease-out);
+}
+.mv-face { fill: url(#mv-body); stroke: #55a6ba; stroke-width: 2.5; }
+.mv-chin { fill: #16323f; }
+.mv-eye {
+  fill: #f4fbfc;
+  transform-box: fill-box; transform-origin: center;
+  transition: transform 0.4s var(--ease-out), fill 0.4s var(--ease-out);
+}
+.mv-shades {
+  fill: #04151b; stroke: #55a6ba; stroke-width: 2;
+  transform-box: fill-box; transform-origin: center top;
+  transform: scaleY(0); opacity: 0;
+  transition: transform 0.35s var(--ease-out), opacity 0.2s var(--ease-out);
+}
+.mv-emote {
+  position: absolute; top: -0.75rem; right: -0.6rem;
+  font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700;
+  color: var(--accent); line-height: 1;
+}
+
+.marvin-say {
+  max-width: 22ch; text-align: right;
+  font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.45;
+  letter-spacing: 0.03em; color: var(--text-muted);
+  background: var(--surface-raised); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.45rem 0.65rem;
+}
+.marvin-say:empty { display: none; }
+
+/* --- moods --- */
+.marvin-hud[data-mood="blank"] .mv-eye { fill: #7f979e; }
+.marvin-hud[data-mood="blank"] .mv-eye-l { transform: scale(0.42); }
+.marvin-hud[data-mood="blank"] .mv-eye-r { transform: scaleX(0.3); }
+.marvin-hud[data-mood="blank"] .mv-emote::before { content: "..."; }
+
+.marvin-hud[data-mood="confused"] .marvin-svg { transform: rotate(-9deg); }
+.marvin-hud[data-mood="confused"] .mv-eye-l { transform: scale(0.78); }
+.marvin-hud[data-mood="confused"] .mv-eye-r { transform: scaleX(0.42) scaleY(1.55); }
+.marvin-hud[data-mood="confused"] .mv-emote::before { content: "?"; }
+
+.marvin-hud[data-mood="panic"] .marvin-svg { animation: marvin-jitter 0.42s linear infinite; }
+.marvin-hud[data-mood="panic"] .mv-eye-l { transform: scale(1.16); }
+.marvin-hud[data-mood="panic"] .mv-eye-r { transform: scaleX(0.62) scaleY(1.7); }
+.marvin-hud[data-mood="panic"] .mv-emote::before { content: "!!"; }
+
+.marvin-hud[data-mood="smug"] .marvin-svg { transform: rotate(6deg); }
+.marvin-hud[data-mood="smug"] .mv-eye-l { transform: scaleY(0.2); }
+.marvin-hud[data-mood="smug"] .mv-eye-r { transform: scaleY(0.95) scaleX(0.78); }
+
+.marvin-hud[data-mood="happy"] .mv-eye-l { transform: scaleY(0.5) translateY(-3px); }
+.marvin-hud[data-mood="happy"] .mv-eye-r { transform: scaleY(0.72); }
+.marvin-hud[data-mood="happy"] .mv-emote::before { content: "✓"; }
+
+.marvin-hud[data-mood="shades"] .mv-shades { transform: scaleY(1); opacity: 1; }
+
+@keyframes marvin-jitter {
+  0%, 100% { transform: translateX(-1.5px) rotate(-2deg); }
+  50%      { transform: translateX(1.5px) rotate(2deg); }
+}
+
+/* ============================================================
    Smaller screens
    ============================================================ */
 @media (max-width: 1100px) {
   .slide { padding: 3rem 2.5rem 4rem; }
+  .marvin-hud { display: none; }
   .title-layout { grid-template-columns: 1fr minmax(280px, 0.72fr); gap: 2.5rem; }
   .title-visual { width: min(360px, 34vw); }
   .cap-grid { grid-template-columns: repeat(2, 1fr); }
