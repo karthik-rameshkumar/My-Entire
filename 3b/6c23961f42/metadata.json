@@ -1,0 +1,29 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "3b6c23961f42",
+  "strategy": "manual-commit",
+  "branch": "agent/kannada-cover-thank-you",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "README.md",
+    "css/deck.css",
+    "index.html",
+    "js/deck.js"
+  ],
+  "sessions": [
+    {
+      "metadata": "/3b/6c23961f42/0/metadata.json",
+      "transcript": "/3b/6c23961f42/0/full.jsonl",
+      "compact_transcript": "/3b/6c23961f42/0/transcript.jsonl",
+      "content_hash": "/3b/6c23961f42/0/content_hash.txt",
+      "prompt": "/3b/6c23961f42/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 1224,
+    "cache_creation_tokens": 234511,
+    "cache_read_tokens": 5935825,
+    "output_tokens": 69300,
+    "api_call_count": 43
+  }
+}
