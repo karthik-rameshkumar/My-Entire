@@ -395,6 +395,15 @@ h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
 }
 .s-act h2 { font-size: clamp(2.6rem, 5vw, 4.6rem); margin-top: 1.6rem; }
 .s-act .sub { margin-top: 0.8rem; }
+.hands-up {
+  list-style: none; margin-top: 2.4rem;
+  display: flex; flex-direction: column; gap: 0.55rem;
+  font-family: var(--font-mono); font-size: clamp(0.95rem, 1.35vw, 1.25rem);
+  color: var(--text-muted); letter-spacing: 0.01em;
+}
+.hands-up li::before { content: "✋  "; }
+.hands-up li:first-child { color: var(--text); }
+.hands-up li:last-child { color: var(--accent); }
 
 /* ============================================================
    Slide 4 — Terminal (agent forgot everything)
@@ -479,6 +488,8 @@ h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
 .git-panel .cm { color: var(--text-dim); }
 .git-panel .sha { color: var(--amber); }
 .git-panel .q { color: var(--text); }
+.git-panel .x { color: var(--red); }
+.git-panel .why { padding-top: 0.2rem; margin-top: 0.3rem; border-top: 1px dashed var(--border); }
 .git-answers .head, .git-questions .head {
   font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
   letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem;
@@ -634,7 +645,7 @@ h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
 /* ============================================================
    Slide 11 — what Entire is not
    ============================================================ */
-.not-list { list-style: none; margin-top: 2.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 2.4rem; }
+.not-list { list-style: none; margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 2.4rem; }
 .not-list li {
   font-family: var(--font-headline); font-weight: 540;
   font-size: clamp(1.15rem, 1.8vw, 1.6rem);
@@ -654,6 +665,7 @@ h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
    Slide 12 — live demo
    ============================================================ */
 .s-demo { text-align: center; }
+.s-demo .sub { margin: 0 auto; color: var(--text-dim); font-style: italic; }
 .demo-steps {
   display: flex; justify-content: center; gap: 0.85rem; flex-wrap: wrap;
   margin: 2.6rem auto 0; max-width: 900px;
@@ -934,12 +946,142 @@ h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
 .slide:not(.active) .close-marvin .marvin,
 .slide:not(.active) .marvin-wave { animation-play-state: paused; }
 
+
+/* ============================================================
+   Interval slides — Bollywood edition (Ghajini · Deewaar · Mr. India)
+   ============================================================ */
+/* Ghajini: the Polaroid wall */
+.s-ghajini .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3.2rem; align-items: center; }
+.ghajini-punch {
+  margin-top: 2.2rem;
+  font-family: var(--font-headline); font-weight: 620;
+  font-size: clamp(1.35rem, 2.3vw, 2.1rem); line-height: 1.25;
+}
+.polaroid-wall { position: relative; height: 450px; }
+.polaroid {
+  position: absolute; left: var(--x); top: var(--y); width: 212px; margin: 0;
+  padding: 10px 10px 12px;
+  background: #f3efe6; border-radius: 3px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.4);
+  transform: rotate(var(--r));
+  opacity: 0;
+}
+.slide.active .polaroid:not([data-fragment]) {
+  animation: polaroid-drop 0.7s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 220ms + 500ms);
+}
+@keyframes polaroid-drop {
+  from { opacity: 0; transform: translateY(-46px) rotate(calc(var(--r) - 8deg)); }
+  to   { opacity: 1; transform: rotate(var(--r)); }
+}
+.polaroid::before {
+  content: ""; position: absolute; top: -7px; left: 50%; width: 14px; height: 14px; margin-left: -7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8a70, #b8321a);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.polaroid .ph {
+  height: 150px; padding: 0.7rem;
+  background: linear-gradient(160deg, #10202a, #06090b);
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 0.3rem;
+  font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.35; color: #d3e6ea;
+}
+.polaroid .ph-ln { display: block; }
+.polaroid .ph .warn { color: var(--amber); }
+.polaroid .ph .ok { color: var(--lime); }
+.polaroid .ph .p { color: var(--accent); }
+.polaroid .ph .mut { color: #6f8a91; }
+.polaroid figcaption {
+  margin-top: 0.7rem; min-height: 2.5rem;
+  font-family: "Segoe Print", "Bradley Hand", "Marker Felt", "Comic Sans MS", cursive;
+  font-weight: 700; font-size: 0.8rem; line-height: 1.25;
+  color: #1f1a17; text-transform: uppercase; letter-spacing: 0.02em;
+}
+.polaroid.is-checkpoint { z-index: 3; background: #fff4ef; }
+.polaroid.is-checkpoint figcaption { color: var(--accent); }
+.polaroid.is-checkpoint::after {
+  content: ""; position: absolute; top: -9px; right: -20px; width: 74px; height: 22px;
+  background: rgba(242,85,51,0.78); transform: rotate(35deg);
+}
+/* the fragment Polaroid slams on: keep its rotation through the generic fragment transforms */
+.polaroid[data-fragment] {
+  opacity: 0; transform: rotate(var(--r)) scale(1.55);
+  transition: opacity 0.2s ease-out, transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.polaroid[data-fragment].revealed { opacity: 1; transform: rotate(var(--r)) scale(1); }
+
+/* Deewaar: two terminals, one line */
+.deewaar-cols { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.6rem; margin-top: 1.4rem; align-items: start; }
+.deewaar-cols .term-body { min-height: 0; }
+.slide.active .term-body .ln[data-fragment] { animation: none; }
+.term-body .ln[data-fragment].revealed { opacity: 1; }
+.deewaar-b .deewaar-line { font-weight: 700; color: var(--text); }
+.deewaar-punch {
+  margin-top: 2rem; text-align: center;
+  font-family: var(--font-indic); font-weight: 600;
+  font-size: clamp(2.2rem, 4.6vw, 4.2rem); line-height: 1.2; color: var(--text);
+}
+
+/* Mr. India: the Gate stamps its verdict */
+.mogambo-card { position: relative; }
+.verdict-pass { color: var(--lime); background: rgba(154,230,0,0.1); border: 1px solid rgba(154,230,0,0.3); opacity: 0; }
+.slide.active .verdict-pass {
+  animation: verdict-in 0.45s var(--ease-out) both;
+  animation-delay: calc(1.3s + var(--i) * 420ms);
+}
+@keyframes verdict-in { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+.stamp {
+  position: absolute; left: 50%; top: 50%; z-index: 3;
+  padding: 0.9rem 2.2rem 1.1rem;
+  border: 6px double var(--lime); border-radius: 14px;
+  color: var(--lime); text-align: center; text-transform: uppercase;
+  font-family: var(--font-headline); font-weight: 720; letter-spacing: 0.06em; line-height: 0.95;
+  background: rgba(7,7,7,0.62);
+  box-shadow: 0 0 70px rgba(154,230,0,0.28);
+  white-space: nowrap;
+}
+.stamp .stamp-t { display: block; font-size: clamp(2.4rem, 4.4vw, 4rem); }
+.stamp .stamp-s { display: block; margin-top: 0.6rem; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.3em; font-weight: 700; }
+.stamp[data-fragment] {
+  opacity: 0; transform: translate(-50%, -50%) rotate(-9deg) scale(1.7);
+  transition: opacity 0.2s ease-out, transform 0.38s cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+.stamp[data-fragment].revealed { opacity: 1; transform: translate(-50%, -50%) rotate(-9deg) scale(1); }
+.mogambo-foot {
+  margin-top: 1.8rem;
+  font-family: var(--font-headline); font-weight: 600;
+  font-size: clamp(1.2rem, 2vw, 1.8rem); line-height: 1.3;
+}
+
+/* ============================================================
+   Marvin party (M key) — visors rain, the big Marvin spins
+   ============================================================ */
+#party {
+  position: fixed; inset: 0; z-index: 44; pointer-events: none; overflow: hidden;
+}
+#party .party-visor {
+  position: absolute; top: -120px; left: var(--x);
+  width: var(--size);
+  animation: party-fall var(--dur) linear var(--delay) infinite;
+}
+@keyframes party-fall {
+  from { transform: translateY(0) rotate(0deg); opacity: 0; }
+  8%   { opacity: 1; }
+  to   { transform: translateY(118vh) rotate(var(--rot)); opacity: 1; }
+}
+body.party .close-marvin .marvin { animation: marvin-spin 1.1s linear infinite; }
+body.party .marvin-halo { animation: halo-pulse 0.55s ease-in-out infinite alternate; }
+body.party .marvin-wave { animation-duration: 0.5s; }
+@keyframes marvin-spin { to { transform: rotate(360deg); } }
+@keyframes halo-pulse { from { transform: scale(0.9); opacity: 0.7; } to { transform: scale(1.35); opacity: 1; } }
+
 /* ============================================================
    Reduced motion
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }
   .stage-glow { animation: none; }
+  #party { display: none; }
   [data-animate], .slide.active [data-animate] { opacity: 1; animation: none; }
   .slide.active .prog-step, .slide.active .term-body .ln { opacity: 1; animation: none; }
 }
@@ -990,7 +1132,7 @@ h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
 }
 
 .marvin-say {
-  max-width: 22ch; text-align: right;
+  max-width: 26ch; text-align: right;
   font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.45;
   letter-spacing: 0.03em; color: var(--text-muted);
   background: var(--surface-raised); border: 1px solid var(--border);
@@ -1024,6 +1166,33 @@ h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
 
 .marvin-hud[data-mood="shades"] .mv-shades { transform: scaleY(1); opacity: 1; }
 
+.marvin-hud[data-mood="shrug"] .marvin-svg { transform: rotate(-4deg); }
+.marvin-hud[data-mood="shrug"] .mv-eye-l { transform: scaleY(0.55); }
+.marvin-hud[data-mood="shrug"] .mv-eye-r { transform: scaleY(0.5) scaleX(0.85); }
+.marvin-hud[data-mood="shrug"] .mv-emote::before { content: "~"; }
+
+.marvin-hud[data-mood="sleepy"] .marvin-svg { transform: rotate(4deg) translateY(3px); }
+.marvin-hud[data-mood="sleepy"] .mv-eye { fill: #a9bec4; }
+.marvin-hud[data-mood="sleepy"] .mv-eye-l { transform: scaleY(0.12); }
+.marvin-hud[data-mood="sleepy"] .mv-eye-r { transform: scaleY(0.14); }
+.marvin-hud[data-mood="sleepy"] .mv-emote::before { content: "zzz"; color: var(--text-dim); }
+
+.marvin-hud[data-mood="heart"] .mv-eye-l { transform: scaleY(0.5) translateY(-3px); }
+.marvin-hud[data-mood="heart"] .mv-eye-r { transform: scaleY(0.72); }
+.marvin-hud[data-mood="heart"] .mv-emote::before { content: "♥"; font-size: 1.15em; }
+
+.marvin-hud[data-mood="party"] .mv-shades { transform: scaleY(1); opacity: 1; }
+.marvin-hud[data-mood="party"] .marvin-svg { animation: marvin-jitter 0.3s linear infinite; }
+.marvin-hud[data-mood="party"] .mv-emote::before { content: "🎉"; font-size: 1.2em; }
+.marvin-hud[data-mood="party"] .marvin-say { color: var(--text); border-color: var(--accent); }
+
+/* a beat swap: the bubble pops so the reversal reads as a new line */
+.marvin-hud.is-swapping .marvin-say { animation: say-pop 0.32s var(--ease-out); }
+@keyframes say-pop {
+  0%   { transform: scale(0.92); opacity: 0.4; }
+  100% { transform: none; opacity: 1; }
+}
+
 @keyframes marvin-jitter {
   0%, 100% { transform: translateX(-1.5px) rotate(-2deg); }
   50%      { transform: translateX(1.5px) rotate(2deg); }
@@ -1039,7 +1208,8 @@ h1.lang-cycle, h2.lang-cycle, p.lang-cycle { display: grid; }
   .title-visual { width: min(360px, 34vw); }
   .cap-grid { grid-template-columns: repeat(2, 1fr); }
   .agent-row { grid-template-columns: repeat(3, 1fr); }
-  .s-forgot .cols, .s-git .cols, .s-cta .cols, .s-network .cols { grid-template-columns: 1fr; gap: 2rem; }
+  .s-forgot .cols, .s-git .cols, .s-cta .cols, .s-network .cols, .s-ghajini .cols, .deewaar-cols { grid-template-columns: 1fr; gap: 2rem; }
+  .polaroid-wall { height: 380px; }
   .prim-grid { grid-template-columns: 1fr; }
   .princ-list { columns: 1; }
   .runner-row { grid-template-columns: 1fr; gap: 0.3rem; }

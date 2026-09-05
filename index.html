@@ -18,7 +18,7 @@
 <div class="hud hud-counter" id="hudCounter"></div>
 <div class="progress" id="progress"></div>
 
-<!-- Marvin's cameos. Each slide opts in with data-marvin="mood|line" -->
+<!-- Marvin's cameos. Each slide opts in with data-marvin="mood|line"; chain a reversal with "||" -->
 <div class="marvin-hud" id="marvinHud" aria-hidden="true">
   <p class="marvin-say"></p>
   <span class="marvin-cameo">
@@ -104,11 +104,17 @@
       <p class="kicker" data-animate style="--i:1">Act one</p>
       <h2 data-animate style="--i:2">The developer problem</h2>
       <p class="sub" data-animate style="--i:3">We made coding agents incredibly capable — and strangely forgetful.</p>
+      <ul class="hands-up">
+        <li data-fragment>Hands up if you’ve re-explained your codebase to an agent this month.</li>
+        <li data-fragment>This week.</li>
+        <li data-fragment>Today.</li>
+        <li data-fragment>Keep them up if it then suggested the thing you’d already tried.</li>
+      </ul>
     </div>
   </section>
 
   <!-- 3 · Context is the real skill (analogy bridge) -->
-  <section class="slide s-analogy" data-act="Act 1 · The developer problem">
+  <section class="slide s-analogy" data-act="Act 1 · The developer problem" data-marvin="smug|obviously they mean me.||blank|...wait, what were we doing?" data-marvin-delay="2400">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer problem</p>
       <h2 data-animate style="--i:1">Think of the best engineer<br>you’ve ever worked with</h2>
@@ -123,7 +129,7 @@
   </section>
 
   <!-- 4 · Your agent forgot everything -->
-  <section class="slide s-forgot" data-act="Act 1 · The developer problem" data-marvin="blank|have we met?">
+  <section class="slide s-forgot" data-act="Act 1 · The developer problem" data-marvin="blank|have we met?||confused|...yen samachara?" data-marvin-delay="4800">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -150,9 +156,12 @@
               <span class="tb-title">agent B · session 1 · next monday</span>
             </div>
             <div class="term-body">
-              <div class="ln" style="--t:3900"><span class="mut">context: empty · memory: none · history: none</span></div>
+              <div class="ln" style="--t:3900"><span class="mut">context: empty · memory: none · confidence: 100%</span></div>
               <div class="ln" style="--t:4250"><span class="tool">●</span> <span class="mut">“Sure! Happy to help. What are we working on?”</span></div>
-              <div class="ln" style="--t:4600"><span class="p">❯</span> <span class="cursor"></span></div>
+              <div class="ln" style="--t:4600"><span class="p">❯</span> continue the rate limiter work</div>
+              <div class="ln" style="--t:4950"><span class="tool">●</span> Explored <span class="mut">src/middleware/ratelimit.ts</span></div>
+              <div class="ln" style="--t:5300"><span class="tool">●</span> <span class="mut">“Nice sliding window! Have you considered a Lua script for atomicity? 😊”</span></div>
+              <div class="ln" style="--t:5650"><span class="p">❯</span> <span class="cursor"></span></div>
             </div>
           </div>
         </div>
@@ -161,6 +170,42 @@
           <h2 data-animate style="--i:2">Your agent forgot everything</h2>
           <p class="sub" data-animate style="--i:3">An hour of exploration. Dozens of tools. Three hidden constraints. Two corrections. The right change, finally.<br><br>Then you close the session — and none of it follows you.</p>
           <p class="forgot-punch" data-animate style="--i:4">Every new session is the agent’s <strong>first day on the project.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4b · Interval · Ghajini -->
+  <section class="slide s-ghajini" data-act="Act 1 · The developer problem" data-marvin="blank|kalpana?||happy|...i mean, checkpoint." data-marvin-delay="3200" data-marvin-beat="3000">
+    <div class="wrap">
+      <div class="cols">
+        <div class="polaroid-wall" aria-label="Polaroid notes pinned to a wall, Ghajini style">
+          <figure class="polaroid" style="--i:0; --x:2%; --y:4%; --r:-7deg">
+            <div class="ph"><span class="ph-ln"><span class="warn">◆</span> Constraint: Redis cluster</span><span class="ph-ln mut">no multi-key ops</span></div>
+            <figcaption>Redis is cluster mode. No Lua.</figcaption>
+          </figure>
+          <figure class="polaroid" style="--i:1; --x:54%; --y:0%; --r:5deg">
+            <div class="ph"><span class="ph-ln"><span class="p">›</span> You: “keep the token-bucket fallback”</span></div>
+            <figcaption>Keep the token bucket. He said so.</figcaption>
+          </figure>
+          <figure class="polaroid" style="--i:2; --x:6%; --y:50%; --r:4deg">
+            <div class="ph"><span class="ph-ln"><span class="warn">◆</span> Constraint: public API frozen</span><span class="ph-ln mut">do not touch the exports</span></div>
+            <figcaption>Public API is frozen. Don’t.</figcaption>
+          </figure>
+          <figure class="polaroid" style="--i:3; --x:56%; --y:46%; --r:-5deg">
+            <div class="ph"><span class="ph-ln"><span class="mut">✗ Attempt 1: Lua script</span></span><span class="ph-ln mut">rejected in cluster mode</span></div>
+            <figcaption>Already tried this. Do not try again.</figcaption>
+          </figure>
+          <figure class="polaroid is-checkpoint" data-fragment style="--x:29%; --y:22%; --r:-2deg">
+            <div class="ph"><span class="ph-ln"><span class="ok">◈</span> Checkpoint · a3f9c12</span><span class="ph-ln mut">34 tool calls · 2 corrections · 3 constraints</span></div>
+            <figcaption>This was me. All of it.</figcaption>
+          </figure>
+        </div>
+        <div>
+          <p class="kicker" data-animate style="--i:0">Interval · Bollywood edition</p>
+          <h2 data-animate style="--i:1">Your agent has a<br>fifteen-minute memory</h2>
+          <p class="sub" data-animate style="--i:2">Sanjay Singhania survived on tattoos and Polaroids. Your agent has a context window and a cheerful disposition.</p>
+          <p class="ghajini-punch" data-fragment>Sanjay had tattoos.<br>Your agent has a context window.<br><span class="accent">Entire gives it Polaroids.</span></p>
         </div>
       </div>
     </div>
@@ -179,6 +224,7 @@
             <div><span class="sha">a3f9c12</span> <span class="q">What changed?</span> <span class="cm">✓</span></div>
             <div><span class="sha">a3f9c12</span> <span class="q">Who committed it?</span> <span class="cm">✓</span></div>
             <div><span class="sha">a3f9c12</span> <span class="q">When did it happen?</span> <span class="cm">✓</span></div>
+            <div class="why" data-fragment><span class="sha">a3f9c12</span> <span class="q">Why?</span> <span class="x">✗</span> <span class="cm">commit message: “fix”</span></div>
           </div>
         </div>
         <div class="git-questions" data-animate style="--i:3">
@@ -198,7 +244,7 @@
   </section>
 
   <!-- 6 · Agent history is fragmented -->
-  <section class="slide" data-act="Act 1 · The developer problem">
+  <section class="slide" data-act="Act 1 · The developer problem" data-marvin="shrug|vendor says: swalpa adjust maadi.||confused|five agents. zero group chat." data-marvin-delay="3200">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer problem</p>
       <h2 data-animate style="--i:1">Agent history is fragmented</h2>
@@ -241,7 +287,7 @@
   </section>
 
   <!-- 8 · Meet Entire -->
-  <section class="slide" data-act="Act 2 · Entire today" data-marvin="happy|i remember now.">
+  <section class="slide" data-act="Act 2 · Entire today" data-marvin="happy|i remember now.||shades|sakkath.">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
       <h2 data-animate style="--i:1">Meet Entire</h2>
@@ -272,6 +318,41 @@
         </div>
       </div>
       <p class="pull-quote meet-line" data-animate style="--i:4">Your repository doesn’t just remember the final answer. <span class="accent">It remembers how you arrived there.</span></p>
+    </div>
+  </section>
+
+  <!-- 8b · Interval · Deewaar -->
+  <section class="slide s-deewaar" data-act="Act 2 · Entire today" data-marvin="shades|bas. itna hi." data-marvin-delay="5200">
+    <div class="wrap">
+      <p class="kicker" data-animate style="--i:0">Interval · Bollywood edition</p>
+      <h2 data-animate style="--i:1">Tumhare paas kya hai?</h2>
+      <div class="deewaar-cols">
+        <div class="term" data-animate style="--i:2">
+          <div class="term-bar">
+            <span class="tb"></span><span class="tb"></span><span class="tb"></span>
+            <span class="tb-title">agent A · session 1 · the long speech</span>
+          </div>
+          <div class="term-body">
+            <div class="ln" style="--t:900"><span class="p">❯</span> mere paas 34 tool calls hain.</div>
+            <div class="ln" style="--t:1400"><span class="p">❯</span> 6 test suites hain. 42 green tests hain.</div>
+            <div class="ln" style="--t:1900"><span class="p">❯</span> teen constraints hain. do corrections hain.</div>
+            <div class="ln" style="--t:2400"><span class="p">❯</span> ek ghante ka exploration hai.</div>
+            <div class="ln" style="--t:2900"><span class="p">❯</span> commit <span class="mut">a3f9c12</span> hai.</div>
+            <div class="ln" style="--t:3700"><span class="warn">❯</span> ...tumhare paas kya hai?</div>
+          </div>
+        </div>
+        <div class="term deewaar-b" data-animate style="--i:3">
+          <div class="term-bar">
+            <span class="tb"></span><span class="tb"></span><span class="tb"></span>
+            <span class="tb-title">agent B · fresh session · entire enabled</span>
+          </div>
+          <div class="term-body">
+            <div class="ln" style="--t:4300"><span class="mut">context: restored from checkpoint a3f9c12</span></div>
+            <div class="ln deewaar-line" data-fragment><span class="p">❯</span> mere paas Checkpoint hai. <span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="deewaar-punch" data-fragment lang="hi">मेरे पास <span class="accent">Checkpoint</span> है।</p>
     </div>
   </section>
 
@@ -312,14 +393,14 @@
   </section>
 
   <!-- 10 · What this lets you do today -->
-  <section class="slide" data-act="Act 2 · Entire today">
+  <section class="slide" data-act="Act 2 · Entire today" data-marvin="sleepy|took the long weekend.||happy|still remember everything." data-marvin-delay="2600">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
       <h2 data-animate style="--i:1">What this lets developers do today</h2>
       <div class="cap-grid">
-        <div class="cap" data-animate style="--i:2"><span class="c-ico">↩</span><p class="c-t">Return after a week</p><p class="c-d">Ask what happened, what was discovered, and what’s unfinished.</p></div>
+        <div class="cap" data-animate style="--i:2"><span class="c-ico">↩</span><p class="c-t">Return after Diwali</p><p class="c-d">Ask what happened, what was discovered, and what’s unfinished. Skip the archaeology.</p></div>
         <div class="cap" data-animate style="--i:3"><span class="c-ico">⇄</span><p class="c-t">Switch agents freely</p><p class="c-d">Another agent retrieves and summarizes the previous session.</p></div>
-        <div class="cap" data-animate style="--i:4"><span class="c-ico">?</span><p class="c-t">Understand unfamiliar code</p><p class="c-d">Trace a function, file, or line back to the session that produced it.</p></div>
+        <div class="cap" data-animate style="--i:4"><span class="c-ico">?</span><p class="c-t">Understand unfamiliar code</p><p class="c-d">Trace a function, file, or line back to the session that produced it. Yes, even <em>that</em> line.</p></div>
         <div class="cap" data-animate style="--i:5"><span class="c-ico">⌕</span><p class="c-t">Investigate a regression</p><p class="c-d">See the original task and implementation path, not just the diff.</p></div>
         <div class="cap" data-animate style="--i:6"><span class="c-ico">✓</span><p class="c-t">Review agent changes</p><p class="c-d">Compare the code with the instructions and constraints behind it.</p></div>
         <div class="cap" data-animate style="--i:7"><span class="c-ico">↻</span><p class="c-t">Reuse what worked</p><p class="c-d">Turn a useful session into a skill instead of re-prompting.</p></div>
@@ -328,7 +409,7 @@
   </section>
 
   <!-- 11 · What Entire is not -->
-  <section class="slide" data-act="Act 2 · Entire today" data-marvin="smug|not a dashboard.">
+  <section class="slide" data-act="Act 2 · Entire today" data-marvin="smug|not a dashboard.||smug|not a metro timeline either." data-marvin-delay="2200" data-marvin-beat="4200">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
       <h2 data-animate style="--i:1">What Entire is <em>not</em></h2>
@@ -338,17 +419,20 @@
         <li data-animate style="--i:4"><span class="x">✗</span><s>A prompt manager</s></li>
         <li data-animate style="--i:5"><span class="x">✗</span><s>A generic chat archive</s></li>
         <li data-animate style="--i:6"><span class="x">✗</span><s>Yet another MCP server</s></li>
-        <li data-animate style="--i:7"><span class="x">✗</span><s>A dashboard you’ll open twice</s></li>
+        <li data-fragment><span class="x">✗</span><s>A dashboard you’ll open twice</s></li>
+        <li data-fragment><span class="x">✗</span><s>On a Namma Metro timeline</s></li>
+        <li data-fragment><span class="x">✗</span><s>The 47th tab you’ll never close</s></li>
       </ul>
       <p class="is-line" data-animate style="--i:8">Entire sits <span class="accent">across agents</span> and connects their work to durable development history.</p>
     </div>
   </section>
 
   <!-- 12 · Live demo -->
-  <section class="slide s-demo" data-act="Act 2 · Entire today" data-marvin="panic|demo gods, be cool." data-marvin-delay="700">
+  <section class="slide s-demo" data-act="Act 2 · Entire today" data-marvin="panic|demo gods, be cool.||panic|conference wifi, be cooler." data-marvin-delay="700">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0; justify-content:center">Live demo</p>
       <h2 data-animate style="--i:1">Watch the context survive</h2>
+      <p class="sub" data-animate style="--i:2">Live demo. Conference wifi. Bengaluru power grid. What could go wrong.</p>
       <div class="demo-steps">
         <span class="demo-step" data-animate style="--i:2">task with agent A</span>
         <span class="demo-step" data-animate style="--i:3">investigate &amp; implement</span>
@@ -455,7 +539,7 @@
             <span class="r-q">Does it perform better under the expected load?</span>
             <span class="verdict verdict-review">uncertain → review</span>
           </div>
-          <div class="runner-row">
+          <div class="runner-row" data-fragment>
             <span class="r-name"><span class="accent">▷</span> friday-5pm</span>
             <span class="r-q">Would <em>you</em> merge this at 5pm on a Friday?</span>
             <span class="verdict verdict-review">uncertain → review</span>
@@ -466,8 +550,51 @@
     </div>
   </section>
 
+  <!-- 16b · Interval · Mr. India -->
+  <section class="slide s-mogambo" data-act="Act 3 · The developer harness" data-marvin="panic|please be khush. please." data-marvin-delay="2600">
+    <div class="wrap">
+      <p class="kicker" data-animate style="--i:0">Interval · Bollywood edition</p>
+      <h2 data-animate style="--i:1">The Gate speaks</h2>
+      <div class="trail-card mogambo-card" data-animate style="--i:2">
+        <div class="trail-head">
+          <span class="chip"><span class="dot"></span>Gate</span>
+          <p class="t-title">feature/rate-limiter → main</p>
+          <span class="branch-chip">4 runners · all required</span>
+        </div>
+        <div class="runner-rows">
+          <div class="runner-row" style="--i:0">
+            <span class="r-name"><span class="accent">▷</span> task-completeness</span>
+            <span class="r-q">Did it do the thing?</span>
+            <span class="verdict verdict-pass">pass</span>
+          </div>
+          <div class="runner-row" style="--i:1">
+            <span class="r-name"><span class="accent">▷</span> api-compatibility</span>
+            <span class="r-q">Public API untouched?</span>
+            <span class="verdict verdict-pass">pass</span>
+          </div>
+          <div class="runner-row" style="--i:2">
+            <span class="r-name"><span class="accent">▷</span> performance</span>
+            <span class="r-q">Faster under the expected load?</span>
+            <span class="verdict verdict-pass">pass</span>
+          </div>
+          <div class="runner-row" style="--i:3">
+            <span class="r-name"><span class="accent">▷</span> friday-5pm</span>
+            <span class="r-q">Would <em>you</em> merge this at 5pm on a Friday?</span>
+            <span class="verdict verdict-pass">pass · it’s tuesday</span>
+          </div>
+        </div>
+        <div class="stamp" data-fragment aria-label="Mogambo khush hua, merge allowed">
+          <span class="stamp-t">Mogambo</span>
+          <span class="stamp-t">khush hua</span>
+          <span class="stamp-s">· merge allowed ·</span>
+        </div>
+      </div>
+      <p class="mogambo-foot" data-fragment>Fail one runner and Mogambo is <span class="accent">not</span> khush. <span class="dim">Your Runners. Your Gate. Your Mogambo.</span></p>
+    </div>
+  </section>
+
   <!-- 17 · Distributed Git network -->
-  <section class="slide s-network" data-act="Act 3 · The developer harness" data-marvin="shades|faster than the ORR at 6pm.">
+  <section class="slide s-network" data-act="Act 3 · The developer harness" data-marvin="shades|faster than crossing silk board.">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -476,7 +603,7 @@
           <ul class="net-list" data-animate style="--i:2">
             <li>Runners and ephemeral environments mean more clones and fetches</li>
             <li>More parallel branches, higher read/write concurrency</li>
-            <li>More demand for regional performance</li>
+            <li>More demand for regional performance. A Bengaluru dev shouldn’t clone from Virginia.</li>
           </ul>
           <p class="sub" data-animate style="--i:3; margin-top:1.4rem">Entire’s distributed Git network mirrors repositories into regional cells built for agent-scale traffic, <strong>while you keep using GitHub</strong>.</p>
           <p class="net-quote" data-animate style="--i:4">Git was designed to be distributed. Agentic development is our chance to make software infrastructure <strong>open and distributed again</strong>.</p>
@@ -528,7 +655,7 @@
   </section>
 
   <!-- 18 · The principles -->
-  <section class="slide" data-act="The invitation">
+  <section class="slide" data-act="The invitation" data-marvin="smug|i’ve figured it out. not telling." data-marvin-delay="4200">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The invitation</p>
       <h2 data-animate style="--i:1">What Entire is built on</h2>
@@ -543,7 +670,7 @@
   </section>
 
   <!-- 19 · Build it with us -->
-  <section class="slide s-cta" data-act="The invitation" data-marvin="happy|see you in the repo.">
+  <section class="slide s-cta" data-act="The invitation" data-marvin="happy|see you in the repo.||happy|chill maadi. it’s one command." data-marvin-delay="3800">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -573,7 +700,9 @@
             <div class="ln" style="--t:3000">&nbsp;</div>
             <div class="ln" style="--t:3000"><span class="mut"># then just work</span></div>
             <div class="ln" style="--t:3300"><span class="mut"># that’s the whole setup · no dashboard to configure</span></div>
-            <div class="ln" style="--t:3600"><span class="p">❯</span> <span class="cursor"></span></div>
+            <div class="ln" style="--t:3600"><span class="mut"># no yaml either. we checked.</span></div>
+            <div class="ln" style="--t:3900"><span class="mut"># ek baar jo maine commit kar di... uske baad main khud ki bhi nahi sunta.</span></div>
+            <div class="ln" style="--t:4200"><span class="p">❯</span> <span class="cursor"></span></div>
           </div>
         </div>
       </div>
@@ -581,7 +710,7 @@
   </section>
 
   <!-- 20 · Stay connected -->
-  <section class="slide s-connect" data-act="The invitation">
+  <section class="slide s-connect" data-act="The invitation" data-marvin="heart|i’ll remember you. it’s kind of my whole thing." data-marvin-delay="2600">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Before you go</p>
       <h2 data-animate style="--i:1">Two ways to stay in the loop</h2>
