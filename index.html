@@ -13,21 +13,71 @@
 <div class="stage-glow"></div>
 
 <div class="hud-mark"><img src="assets/mark.svg" alt=""></div>
+<div class="hud-conf"><img src="assets/agentsnexuslogo-light.png" alt="AgentsNexus"></div>
 <div class="hud hud-act" id="hudAct"></div>
 <div class="hud hud-counter" id="hudCounter"></div>
 <div class="progress" id="progress"></div>
 
+<!-- Marvin's cameos. Each slide opts in with data-marvin="mood|line"; chain a reversal with "||" -->
+<div class="marvin-hud" id="marvinHud" aria-hidden="true">
+  <p class="marvin-say"></p>
+  <span class="marvin-cameo">
+    <svg class="marvin-svg" viewBox="0 0 120 68">
+      <defs>
+        <linearGradient id="mv-body" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1d3f4e"/>
+          <stop offset="1" stop-color="#0d1f28"/>
+        </linearGradient>
+      </defs>
+      <rect class="mv-chin" x="51" y="52" width="18" height="10" rx="3"/>
+      <rect class="mv-face" x="3" y="4" width="114" height="52" rx="21"/>
+      <circle class="mv-eye mv-eye-l" cx="45" cy="30" r="11"/>
+      <rect class="mv-eye mv-eye-r" x="66" y="25" width="26" height="10" rx="5"/>
+      <rect class="mv-shades" x="12" y="18" width="96" height="21" rx="8"/>
+    </svg>
+    <b class="mv-emote"></b>
+  </span>
+</div>
+
+
 <main class="deck" id="deck">
 
   <!-- 1 · Title -->
-  <section class="slide s-title" data-act="">
+  <section class="slide s-title" data-act="" data-lang-cycle>
     <div class="wrap title-layout">
       <div class="title-copy">
         <img class="logo" src="assets/logo.svg" alt="Entire" data-animate style="--i:0">
-        <p class="title-location" data-animate style="--i:1"><span>ಬೆಂಗಳೂರು</span> · BENGALURU</p>
-        <h1 lang="kn" data-animate style="--i:2">ಕೋಡ್ ಮತ್ತು ಅದರ ಸಂದರ್ಭ,<br><strong>ಒಟ್ಟಿಗೆ ಆವೃತ್ತಿಗೊಳಿಸಲಾಗಿದೆ.</strong></h1>
-        <p class="title-translation" data-animate style="--i:3">Code and its context, <strong>versioned together.</strong></p>
-        <p class="title-tagline" data-animate style="--i:4">The developer platform for the agentic era · <em>entire.io</em></p>
+        <p class="title-location" data-animate style="--i:1"><span class="lang-cycle"><span class="lang-line" lang="kn">ಬೆಂಗಳೂರು</span><span class="lang-line" lang="ta">பெங்களூரு</span><span class="lang-line" lang="te">బెంగళూరు</span><span class="lang-line" lang="ml">ബെംഗളൂരു</span><span class="lang-line" lang="hi">बेंगलुरु</span><span class="lang-line" lang="mr">बेंगळुरू</span><span class="lang-line" lang="bn">বেঙ্গালুরু</span><span class="lang-line" lang="gu">બેંગલુરુ</span><span class="lang-line" lang="pa">ਬੈਂਗਲੁਰੂ</span><span class="lang-line" lang="or">ବେଙ୍ଗାଲୁରୁ</span><span class="lang-line" lang="ur">بنگلورو</span></span> · BENGALURU</p>
+        <h1 class="lang-cycle" data-animate style="--i:2">
+          <span class="lang-line" lang="kn">ಏಜೆಂಟ್ ಯುಗಕ್ಕಾಗಿ,<br><strong>ಡೆವಲಪರ್ ವೇದಿಕೆ.</strong></span>
+          <span class="lang-line" lang="ta">ஏஜென்ட் யுகத்தின்,<br><strong>டெவலப்பர் தளம்.</strong></span>
+          <span class="lang-line" lang="te">ఏజెంట్ యుగం కోసం,<br><strong>డెవలపర్ వేదిక.</strong></span>
+          <span class="lang-line" lang="ml">ഏജന്റ് യുഗത്തിന്,<br><strong>ഡെവലപ്പർ വേദി.</strong></span>
+          <span class="lang-line" lang="hi">एजेंट युग का,<br><strong>डेवलपर प्लेटफ़ॉर्म।</strong></span>
+          <span class="lang-line" lang="mr">एजंट युगाचे,<br><strong>डेव्हलपर प्लॅटफॉर्म.</strong></span>
+          <span class="lang-line" lang="bn">এজেন্ট যুগের,<br><strong>ডেভেলপার প্ল্যাটফর্ম।</strong></span>
+          <span class="lang-line" lang="gu">એજન્ટ યુગનું,<br><strong>ડેવલપર પ્લેટફોર્મ.</strong></span>
+          <span class="lang-line" lang="pa">ਏਜੰਟ ਯੁੱਗ ਦਾ,<br><strong>ਡਿਵੈਲਪਰ ਪਲੇਟਫਾਰਮ।</strong></span>
+          <span class="lang-line" lang="or">ଏଜେଣ୍ଟ ଯୁଗର,<br><strong>ଡେଭଲପର ପ୍ଲାଟଫର୍ମ।</strong></span>
+          <span class="lang-line" lang="ur" dir="rtl">ایجنٹ دور کا،<br><strong>ڈویلپر پلیٹ فارم۔</strong></span>
+        </h1>
+        <p class="title-translation" data-animate style="--i:3">The developer platform for the <strong>agent era.</strong></p>
+        <p class="lang-tag" data-animate style="--i:4">
+          <span class="lang-cycle">
+            <span class="lang-line" lang="kn"><span class="lang-native">ಕನ್ನಡ</span> · Kannada</span>
+            <span class="lang-line" lang="ta"><span class="lang-native">தமிழ்</span> · Tamil</span>
+            <span class="lang-line" lang="te"><span class="lang-native">తెలుగు</span> · Telugu</span>
+            <span class="lang-line" lang="ml"><span class="lang-native">മലയാളം</span> · Malayalam</span>
+            <span class="lang-line" lang="hi"><span class="lang-native">हिन्दी</span> · Hindi</span>
+            <span class="lang-line" lang="mr"><span class="lang-native">मराठी</span> · Marathi</span>
+            <span class="lang-line" lang="bn"><span class="lang-native">বাংলা</span> · Bengali</span>
+            <span class="lang-line" lang="gu"><span class="lang-native">ગુજરાતી</span> · Gujarati</span>
+            <span class="lang-line" lang="pa"><span class="lang-native">ਪੰਜਾਬੀ</span> · Punjabi</span>
+            <span class="lang-line" lang="or"><span class="lang-native">ଓଡ଼ିଆ</span> · Odia</span>
+            <span class="lang-line" lang="ur"><span class="lang-native">اردو</span> · Urdu</span>
+          </span>
+        </p>
+        <p class="title-tagline" data-animate style="--i:5">Code and its context, versioned together · <em>entire.io</em></p>
       </div>
 
       <div class="title-visual" aria-label="Marvin following a trail of versioned checkpoints" data-animate style="--i:2">
@@ -54,11 +104,32 @@
       <p class="kicker" data-animate style="--i:1">Act one</p>
       <h2 data-animate style="--i:2">The developer problem</h2>
       <p class="sub" data-animate style="--i:3">We made coding agents incredibly capable — and strangely forgetful.</p>
+      <ul class="hands-up">
+        <li data-fragment>Hands up if you’ve re-explained your codebase to an agent this month.</li>
+        <li data-fragment>This week.</li>
+        <li data-fragment>Today.</li>
+        <li data-fragment>Keep them up if it then suggested the thing you’d already tried.</li>
+      </ul>
     </div>
   </section>
 
-  <!-- 3 · Your agent forgot everything -->
-  <section class="slide s-forgot" data-act="Act 1 · The developer problem">
+  <!-- 3 · Context is the real skill (analogy bridge) -->
+  <section class="slide s-analogy" data-act="Act 1 · The developer problem" data-marvin="smug|obviously they mean me.||blank|...wait, what were we doing?" data-marvin-delay="2400">
+    <div class="wrap">
+      <p class="kicker" data-animate style="--i:0">The developer problem</p>
+      <h2 data-animate style="--i:1">Think of the best engineer<br>you’ve ever worked with</h2>
+      <p class="sub" data-animate style="--i:2">What makes them irreplaceable was never typing speed.</p>
+      <div class="analogy-grid">
+        <div class="cap" data-animate style="--i:3"><span class="c-ico">◆</span><p class="c-t">They know why</p><p class="c-d">Why the auth flow is weird. Why that dependency is pinned. Which “obvious fix” is a trap.</p></div>
+        <div class="cap" data-animate style="--i:4"><span class="c-ico">✗</span><p class="c-t">They remember dead ends</p><p class="c-d">What was tried last quarter and rolled back — so nobody pays for the same lesson twice.</p></div>
+        <div class="cap" data-animate style="--i:5"><span class="c-ico">›</span><p class="c-t">They carry your corrections</p><p class="c-d">Told once, remembered. Your conventions, your constraints, your taste.</p></div>
+      </div>
+      <p class="analogy-punch" data-fragment>Now imagine they lose all of it <strong>every single night</strong>.<br>Same skill — <span class="accent">a fraction of the engineer.</span> That’s the deal we’ve accepted with coding agents.</p>
+    </div>
+  </section>
+
+  <!-- 4 · Your agent forgot everything -->
+  <section class="slide s-forgot" data-act="Act 1 · The developer problem" data-marvin="blank|have we met?||confused|...yen samachara?" data-marvin-delay="4800">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -68,15 +139,15 @@
               <span class="tb-title">agent A · session 1 · tuesday, 2:14 pm</span>
             </div>
             <div class="term-body">
-              <div class="ln" style="--t:400"><span class="p">❯</span> refactor the rate limiter to sliding windows</div>
-              <div class="ln" style="--t:1100"><span class="tool">●</span> Explored <span class="mut">src/middleware/ratelimit.ts</span> +4 files</div>
-              <div class="ln" style="--t:1800"><span class="tool">●</span> Ran 34 tools · read 6 test suites</div>
-              <div class="ln" style="--t:2600"><span class="warn">◆</span> Constraint: Redis cluster (no multi-key ops)</div>
-              <div class="ln" style="--t:3300"><span class="warn">◆</span> Constraint: public API must stay frozen</div>
-              <div class="ln" style="--t:4000"><span class="mut">✗ Attempt 1: Lua script, rejected in cluster mode</span></div>
-              <div class="ln" style="--t:4700"><span class="p">›</span> You: <span class="mut">“keep the token-bucket fallback”</span></div>
-              <div class="ln" style="--t:5400"><span class="ok">✓</span> Sliding window + fallback · 42 tests green</div>
-              <div class="ln" style="--t:6000"><span class="ok">✓</span> Committed <span class="mut">a3f9c12</span></div>
+              <div class="ln" style="--t:200"><span class="p">❯</span> refactor the rate limiter to sliding windows</div>
+              <div class="ln" style="--t:550"><span class="tool">●</span> Explored <span class="mut">src/middleware/ratelimit.ts</span> +4 files</div>
+              <div class="ln" style="--t:900"><span class="tool">●</span> Ran 34 tools · read 6 test suites</div>
+              <div class="ln" style="--t:1250"><span class="warn">◆</span> Constraint: Redis cluster (no multi-key ops)</div>
+              <div class="ln" style="--t:1600"><span class="warn">◆</span> Constraint: public API must stay frozen</div>
+              <div class="ln" style="--t:1950"><span class="mut">✗ Attempt 1: Lua script, rejected in cluster mode</span></div>
+              <div class="ln" style="--t:2300"><span class="p">›</span> You: <span class="mut">“keep the token-bucket fallback”</span></div>
+              <div class="ln" style="--t:2650"><span class="ok">✓</span> Sliding window + fallback · 42 tests green</div>
+              <div class="ln" style="--t:3000"><span class="ok">✓</span> Committed <span class="mut">a3f9c12</span></div>
             </div>
           </div>
           <div class="term term-session2 card-floating">
@@ -85,8 +156,12 @@
               <span class="tb-title">agent B · session 1 · next monday</span>
             </div>
             <div class="term-body">
-              <div class="ln" style="--t:7600"><span class="mut">context: empty · memory: none · history: none</span></div>
-              <div class="ln" style="--t:8200"><span class="p">❯</span> <span class="cursor"></span></div>
+              <div class="ln" style="--t:3900"><span class="mut">context: empty · memory: none · confidence: 100%</span></div>
+              <div class="ln" style="--t:4250"><span class="tool">●</span> <span class="mut">“Sure! Happy to help. What are we working on?”</span></div>
+              <div class="ln" style="--t:4600"><span class="p">❯</span> continue the rate limiter work</div>
+              <div class="ln" style="--t:4950"><span class="tool">●</span> Explored <span class="mut">src/middleware/ratelimit.ts</span></div>
+              <div class="ln" style="--t:5300"><span class="tool">●</span> <span class="mut">“Nice sliding window! Have you considered a Lua script for atomicity? 😊”</span></div>
+              <div class="ln" style="--t:5650"><span class="p">❯</span> <span class="cursor"></span></div>
             </div>
           </div>
         </div>
@@ -100,8 +175,44 @@
     </div>
   </section>
 
-  <!-- 4 · Git stores the result, not the process -->
-  <section class="slide s-git" data-act="Act 1 · The developer problem">
+  <!-- 4b · Interval · Ghajini -->
+  <section class="slide s-ghajini" data-act="Act 1 · The developer problem" data-marvin="blank|kalpana?||happy|...i mean, checkpoint." data-marvin-delay="3200" data-marvin-beat="3000">
+    <div class="wrap">
+      <div class="cols">
+        <div class="polaroid-wall" aria-label="Polaroid notes pinned to a wall, Ghajini style">
+          <figure class="polaroid" style="--i:0; --x:2%; --y:4%; --r:-7deg">
+            <div class="ph"><span class="ph-ln"><span class="warn">◆</span> Constraint: Redis cluster</span><span class="ph-ln mut">no multi-key ops</span></div>
+            <figcaption>Redis is cluster mode. No Lua.</figcaption>
+          </figure>
+          <figure class="polaroid" style="--i:1; --x:54%; --y:0%; --r:5deg">
+            <div class="ph"><span class="ph-ln"><span class="p">›</span> You: “keep the token-bucket fallback”</span></div>
+            <figcaption>Keep the token bucket. He said so.</figcaption>
+          </figure>
+          <figure class="polaroid" style="--i:2; --x:6%; --y:50%; --r:4deg">
+            <div class="ph"><span class="ph-ln"><span class="warn">◆</span> Constraint: public API frozen</span><span class="ph-ln mut">do not touch the exports</span></div>
+            <figcaption>Public API is frozen. Don’t.</figcaption>
+          </figure>
+          <figure class="polaroid" style="--i:3; --x:56%; --y:46%; --r:-5deg">
+            <div class="ph"><span class="ph-ln"><span class="mut">✗ Attempt 1: Lua script</span></span><span class="ph-ln mut">rejected in cluster mode</span></div>
+            <figcaption>Already tried this. Do not try again.</figcaption>
+          </figure>
+          <figure class="polaroid is-checkpoint" data-fragment style="--x:29%; --y:22%; --r:-2deg">
+            <div class="ph"><span class="ph-ln"><span class="ok">◈</span> Checkpoint · a3f9c12</span><span class="ph-ln mut">34 tool calls · 2 corrections · 3 constraints</span></div>
+            <figcaption>This was me. All of it.</figcaption>
+          </figure>
+        </div>
+        <div>
+          <p class="kicker" data-animate style="--i:0">Interval · Bollywood edition</p>
+          <h2 data-animate style="--i:1">Your agent has a<br>fifteen-minute memory</h2>
+          <p class="sub" data-animate style="--i:2">Sanjay Singhania survived on tattoos and Polaroids. Your agent has a context window and a cheerful disposition.</p>
+          <p class="ghajini-punch" data-fragment>Sanjay had tattoos.<br>Your agent has a context window.<br><span class="accent">Entire gives it Polaroids.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Git stores the result, not the process -->
+  <section class="slide s-git" data-act="Act 1 · The developer problem" data-marvin="confused|so... why though?">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer problem</p>
       <h2 data-animate style="--i:1">Git stores the result, not the process</h2>
@@ -113,6 +224,7 @@
             <div><span class="sha">a3f9c12</span> <span class="q">What changed?</span> <span class="cm">✓</span></div>
             <div><span class="sha">a3f9c12</span> <span class="q">Who committed it?</span> <span class="cm">✓</span></div>
             <div><span class="sha">a3f9c12</span> <span class="q">When did it happen?</span> <span class="cm">✓</span></div>
+            <div class="why" data-fragment><span class="sha">a3f9c12</span> <span class="q">Why?</span> <span class="x">✗</span> <span class="cm">commit message: “fix”</span></div>
           </div>
         </div>
         <div class="git-questions" data-animate style="--i:3">
@@ -131,8 +243,8 @@
     </div>
   </section>
 
-  <!-- 5 · Agent history is fragmented -->
-  <section class="slide" data-act="Act 1 · The developer problem">
+  <!-- 6 · Agent history is fragmented -->
+  <section class="slide" data-act="Act 1 · The developer problem" data-marvin="shrug|vendor says: swalpa adjust maadi.||confused|five agents. zero group chat." data-marvin-delay="3200">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer problem</p>
       <h2 data-animate style="--i:1">Agent history is fragmented</h2>
@@ -164,7 +276,7 @@
     </div>
   </section>
 
-  <!-- 6 · Act 2 divider -->
+  <!-- 7 · Act 2 divider -->
   <section class="slide s-act" data-act="Act 2 · Entire today">
     <div class="wrap">
       <div class="act-num" data-n="02" data-animate style="--i:0">02</div>
@@ -174,8 +286,8 @@
     </div>
   </section>
 
-  <!-- 7 · Meet Entire -->
-  <section class="slide" data-act="Act 2 · Entire today">
+  <!-- 8 · Meet Entire -->
+  <section class="slide" data-act="Act 2 · Entire today" data-marvin="happy|i remember now.||shades|sakkath.">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
       <h2 data-animate style="--i:1">Meet Entire</h2>
@@ -209,7 +321,42 @@
     </div>
   </section>
 
-  <!-- 8 · How it works -->
+  <!-- 8b · Interval · Deewaar -->
+  <section class="slide s-deewaar" data-act="Act 2 · Entire today" data-marvin="shades|bas. itna hi." data-marvin-delay="5200">
+    <div class="wrap">
+      <p class="kicker" data-animate style="--i:0">Interval · Bollywood edition</p>
+      <h2 data-animate style="--i:1">Tumhare paas kya hai?</h2>
+      <div class="deewaar-cols">
+        <div class="term" data-animate style="--i:2">
+          <div class="term-bar">
+            <span class="tb"></span><span class="tb"></span><span class="tb"></span>
+            <span class="tb-title">agent A · session 1 · the long speech</span>
+          </div>
+          <div class="term-body">
+            <div class="ln" style="--t:900"><span class="p">❯</span> mere paas 34 tool calls hain.</div>
+            <div class="ln" style="--t:1400"><span class="p">❯</span> 6 test suites hain. 42 green tests hain.</div>
+            <div class="ln" style="--t:1900"><span class="p">❯</span> teen constraints hain. do corrections hain.</div>
+            <div class="ln" style="--t:2400"><span class="p">❯</span> ek ghante ka exploration hai.</div>
+            <div class="ln" style="--t:2900"><span class="p">❯</span> commit <span class="mut">a3f9c12</span> hai.</div>
+            <div class="ln" style="--t:3700"><span class="warn">❯</span> ...tumhare paas kya hai?</div>
+          </div>
+        </div>
+        <div class="term deewaar-b" data-animate style="--i:3">
+          <div class="term-bar">
+            <span class="tb"></span><span class="tb"></span><span class="tb"></span>
+            <span class="tb-title">agent B · fresh session · entire enabled</span>
+          </div>
+          <div class="term-body">
+            <div class="ln" style="--t:4300"><span class="mut">context: restored from checkpoint a3f9c12</span></div>
+            <div class="ln deewaar-line" data-fragment><span class="p">❯</span> mere paas Checkpoint hai. <span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="deewaar-punch" data-fragment lang="hi">मेरे पास <span class="accent">Checkpoint</span> है।</p>
+    </div>
+  </section>
+
+  <!-- 9 · How it works -->
   <section class="slide" data-act="Act 2 · Entire today">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
@@ -245,15 +392,15 @@
     </div>
   </section>
 
-  <!-- 9 · What this lets you do today -->
-  <section class="slide" data-act="Act 2 · Entire today">
+  <!-- 10 · What this lets you do today -->
+  <section class="slide" data-act="Act 2 · Entire today" data-marvin="sleepy|took the long weekend.||happy|still remember everything." data-marvin-delay="2600">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
       <h2 data-animate style="--i:1">What this lets developers do today</h2>
       <div class="cap-grid">
-        <div class="cap" data-animate style="--i:2"><span class="c-ico">↩</span><p class="c-t">Return after a week</p><p class="c-d">Ask what happened, what was discovered, and what’s unfinished.</p></div>
+        <div class="cap" data-animate style="--i:2"><span class="c-ico">↩</span><p class="c-t">Return after Diwali</p><p class="c-d">Ask what happened, what was discovered, and what’s unfinished. Skip the archaeology.</p></div>
         <div class="cap" data-animate style="--i:3"><span class="c-ico">⇄</span><p class="c-t">Switch agents freely</p><p class="c-d">Another agent retrieves and summarizes the previous session.</p></div>
-        <div class="cap" data-animate style="--i:4"><span class="c-ico">?</span><p class="c-t">Understand unfamiliar code</p><p class="c-d">Trace a function, file, or line back to the session that produced it.</p></div>
+        <div class="cap" data-animate style="--i:4"><span class="c-ico">?</span><p class="c-t">Understand unfamiliar code</p><p class="c-d">Trace a function, file, or line back to the session that produced it. Yes, even <em>that</em> line.</p></div>
         <div class="cap" data-animate style="--i:5"><span class="c-ico">⌕</span><p class="c-t">Investigate a regression</p><p class="c-d">See the original task and implementation path, not just the diff.</p></div>
         <div class="cap" data-animate style="--i:6"><span class="c-ico">✓</span><p class="c-t">Review agent changes</p><p class="c-d">Compare the code with the instructions and constraints behind it.</p></div>
         <div class="cap" data-animate style="--i:7"><span class="c-ico">↻</span><p class="c-t">Reuse what worked</p><p class="c-d">Turn a useful session into a skill instead of re-prompting.</p></div>
@@ -261,8 +408,8 @@
     </div>
   </section>
 
-  <!-- 10 · What Entire is not -->
-  <section class="slide" data-act="Act 2 · Entire today">
+  <!-- 11 · What Entire is not -->
+  <section class="slide" data-act="Act 2 · Entire today" data-marvin="smug|not a dashboard.||smug|not a metro timeline either." data-marvin-delay="2200" data-marvin-beat="4200">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">Entire today</p>
       <h2 data-animate style="--i:1">What Entire is <em>not</em></h2>
@@ -271,16 +418,21 @@
         <li data-animate style="--i:3"><span class="x">✗</span><s>A model proxy</s></li>
         <li data-animate style="--i:4"><span class="x">✗</span><s>A prompt manager</s></li>
         <li data-animate style="--i:5"><span class="x">✗</span><s>A generic chat archive</s></li>
+        <li data-animate style="--i:6"><span class="x">✗</span><s>Yet another MCP server</s></li>
+        <li data-fragment><span class="x">✗</span><s>A dashboard you’ll open twice</s></li>
+        <li data-fragment><span class="x">✗</span><s>On a Namma Metro timeline</s></li>
+        <li data-fragment><span class="x">✗</span><s>The 47th tab you’ll never close</s></li>
       </ul>
-      <p class="is-line" data-animate style="--i:6">Entire sits <span class="accent">across agents</span> and connects their work to durable development history.</p>
+      <p class="is-line" data-animate style="--i:8">Entire sits <span class="accent">across agents</span> and connects their work to durable development history.</p>
     </div>
   </section>
 
-  <!-- 11 · Live demo -->
-  <section class="slide s-demo" data-act="Act 2 · Entire today">
+  <!-- 12 · Live demo -->
+  <section class="slide s-demo" data-act="Act 2 · Entire today" data-marvin="panic|demo gods, be cool.||panic|conference wifi, be cooler." data-marvin-delay="700">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0; justify-content:center">Live demo</p>
       <h2 data-animate style="--i:1">Watch the context survive</h2>
+      <p class="sub" data-animate style="--i:2">Live demo. Conference wifi. Bengaluru power grid. What could go wrong.</p>
       <div class="demo-steps">
         <span class="demo-step" data-animate style="--i:2">task with agent A</span>
         <span class="demo-step" data-animate style="--i:3">investigate &amp; implement</span>
@@ -293,7 +445,7 @@
     </div>
   </section>
 
-  <!-- 12 · Act 3 divider -->
+  <!-- 13 · Act 3 divider -->
   <section class="slide s-act" data-act="Act 3 · The developer harness">
     <div class="wrap">
       <div class="act-num" data-n="03" data-animate style="--i:0">03</div>
@@ -302,7 +454,7 @@
     </div>
   </section>
 
-  <!-- 13 · Foundation, not destination -->
+  <!-- 14 · Foundation, not destination -->
   <section class="slide" data-act="Act 3 · The developer harness">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer harness</p>
@@ -319,7 +471,7 @@
     </div>
   </section>
 
-  <!-- 14 · Trails, Runners, Gates -->
+  <!-- 15 · Trails, Runners, Gates -->
   <section class="slide" data-act="Act 3 · The developer harness">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer harness</p>
@@ -360,8 +512,8 @@
     </div>
   </section>
 
-  <!-- 15 · Make it concrete -->
-  <section class="slide" data-act="Act 3 · The developer harness">
+  <!-- 16 · Make it concrete -->
+  <section class="slide" data-act="Act 3 · The developer harness" data-marvin="smug|not at 5pm on a friday.">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The developer harness</p>
       <h2 data-animate style="--i:1">Make it concrete</h2>
@@ -387,14 +539,62 @@
             <span class="r-q">Does it perform better under the expected load?</span>
             <span class="verdict verdict-review">uncertain → review</span>
           </div>
+          <div class="runner-row" data-fragment>
+            <span class="r-name"><span class="accent">▷</span> friday-5pm</span>
+            <span class="r-q">Would <em>you</em> merge this at 5pm on a Friday?</span>
+            <span class="verdict verdict-review">uncertain → review</span>
+          </div>
         </div>
       </div>
       <p class="concrete-line" data-animate style="--i:3">Entire doesn’t decide what “good” means. <span class="accent">The developer defines it</span>, and stays in control of the harness.</p>
     </div>
   </section>
 
-  <!-- 16 · Distributed Git network -->
-  <section class="slide s-network" data-act="Act 3 · The developer harness">
+  <!-- 16b · Interval · Mr. India -->
+  <section class="slide s-mogambo" data-act="Act 3 · The developer harness" data-marvin="panic|please be khush. please." data-marvin-delay="2600">
+    <div class="wrap">
+      <p class="kicker" data-animate style="--i:0">Interval · Bollywood edition</p>
+      <h2 data-animate style="--i:1">The Gate speaks</h2>
+      <div class="trail-card mogambo-card" data-animate style="--i:2">
+        <div class="trail-head">
+          <span class="chip"><span class="dot"></span>Gate</span>
+          <p class="t-title">feature/rate-limiter → main</p>
+          <span class="branch-chip">4 runners · all required</span>
+        </div>
+        <div class="runner-rows">
+          <div class="runner-row" style="--i:0">
+            <span class="r-name"><span class="accent">▷</span> task-completeness</span>
+            <span class="r-q">Did it do the thing?</span>
+            <span class="verdict verdict-pass">pass</span>
+          </div>
+          <div class="runner-row" style="--i:1">
+            <span class="r-name"><span class="accent">▷</span> api-compatibility</span>
+            <span class="r-q">Public API untouched?</span>
+            <span class="verdict verdict-pass">pass</span>
+          </div>
+          <div class="runner-row" style="--i:2">
+            <span class="r-name"><span class="accent">▷</span> performance</span>
+            <span class="r-q">Faster under the expected load?</span>
+            <span class="verdict verdict-pass">pass</span>
+          </div>
+          <div class="runner-row" style="--i:3">
+            <span class="r-name"><span class="accent">▷</span> friday-5pm</span>
+            <span class="r-q">Would <em>you</em> merge this at 5pm on a Friday?</span>
+            <span class="verdict verdict-pass">pass · it’s tuesday</span>
+          </div>
+        </div>
+        <div class="stamp" data-fragment aria-label="Mogambo khush hua, merge allowed">
+          <span class="stamp-t">Mogambo</span>
+          <span class="stamp-t">khush hua</span>
+          <span class="stamp-s">· merge allowed ·</span>
+        </div>
+      </div>
+      <p class="mogambo-foot" data-fragment>Fail one runner and Mogambo is <span class="accent">not</span> khush. <span class="dim">Your Runners. Your Gate. Your Mogambo.</span></p>
+    </div>
+  </section>
+
+  <!-- 17 · Distributed Git network -->
+  <section class="slide s-network" data-act="Act 3 · The developer harness" data-marvin="shades|faster than crossing silk board.">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -403,7 +603,7 @@
           <ul class="net-list" data-animate style="--i:2">
             <li>Runners and ephemeral environments mean more clones and fetches</li>
             <li>More parallel branches, higher read/write concurrency</li>
-            <li>More demand for regional performance</li>
+            <li>More demand for regional performance. A Bengaluru dev shouldn’t clone from Virginia.</li>
           </ul>
           <p class="sub" data-animate style="--i:3; margin-top:1.4rem">Entire’s distributed Git network mirrors repositories into regional cells built for agent-scale traffic, <strong>while you keep using GitHub</strong>.</p>
           <p class="net-quote" data-animate style="--i:4">Git was designed to be distributed. Agentic development is our chance to make software infrastructure <strong>open and distributed again</strong>.</p>
@@ -454,8 +654,8 @@
     </div>
   </section>
 
-  <!-- 17 · The principles -->
-  <section class="slide" data-act="The invitation">
+  <!-- 18 · The principles -->
+  <section class="slide" data-act="The invitation" data-marvin="smug|i’ve figured it out. not telling." data-marvin-delay="4200">
     <div class="wrap">
       <p class="kicker" data-animate style="--i:0">The invitation</p>
       <h2 data-animate style="--i:1">What Entire is built on</h2>
@@ -469,8 +669,8 @@
     </div>
   </section>
 
-  <!-- 18 · Build it with us -->
-  <section class="slide s-cta" data-act="The invitation">
+  <!-- 19 · Build it with us -->
+  <section class="slide s-cta" data-act="The invitation" data-marvin="happy|see you in the repo.||happy|chill maadi. it’s one command." data-marvin-delay="3800">
     <div class="wrap">
       <div class="cols">
         <div>
@@ -499,15 +699,38 @@
             <div class="ln" style="--t:2400"><span class="ok">✓</span> checkpoints active · agent sessions will be preserved</div>
             <div class="ln" style="--t:3000">&nbsp;</div>
             <div class="ln" style="--t:3000"><span class="mut"># then just work</span></div>
-            <div class="ln" style="--t:3300"><span class="p">❯</span> <span class="cursor"></span></div>
+            <div class="ln" style="--t:3300"><span class="mut"># that’s the whole setup · no dashboard to configure</span></div>
+            <div class="ln" style="--t:3600"><span class="mut"># no yaml either. we checked.</span></div>
+            <div class="ln" style="--t:3900"><span class="mut"># ek baar jo maine commit kar di... uske baad main khud ki bhi nahi sunta.</span></div>
+            <div class="ln" style="--t:4200"><span class="p">❯</span> <span class="cursor"></span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 19 · Thank you -->
-  <section class="slide s-close" data-act="">
+  <!-- 20 · Stay connected -->
+  <section class="slide s-connect" data-act="The invitation" data-marvin="heart|i’ll remember you. it’s kind of my whole thing." data-marvin-delay="2600">
+    <div class="wrap">
+      <p class="kicker" data-animate style="--i:0">Before you go</p>
+      <h2 data-animate style="--i:1">Two ways to stay in the loop</h2>
+      <div class="connect-cols">
+        <div class="connect-card" data-animate style="--i:2">
+          <p class="cn-head">Join the waitlist</p>
+          <p class="cn-body">Checkpoints are open source today. The platform — Trails, Runners, Gates, and the Git network — is rolling out to the waitlist first.</p>
+          <p class="cn-url">entire.io <span class="cn-arrow">↗</span></p>
+        </div>
+        <div class="connect-card" data-animate style="--i:3">
+          <p class="cn-head">Connect with me</p>
+          <p class="cn-body"><strong>Karthik Rameshkumar</strong> · Field CTO @ Entire<br>Scan to say hello on LinkedIn — questions, feedback, and war stories welcome.</p>
+          <img class="cn-qr" src="assets/linkedin-qr.png" alt="QR code linking to Karthik Rameshkumar's LinkedIn profile">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 · Thank you -->
+  <section class="slide s-close" data-act="" data-lang-cycle>
     <div class="wrap close-layout">
       <div class="close-trail" aria-hidden="true" data-animate style="--i:0">
         <span class="close-path"></span>
@@ -521,11 +744,50 @@
         <img class="marvin" src="assets/marvin-face.png" alt="Marvin">
         <span class="marvin-wave" aria-hidden="true">⌁</span>
       </div>
-      <p class="close-eyebrow" data-animate style="--i:2">ಇದು ವಿದಾಯವಲ್ಲ · THIS IS A CHECKPOINT</p>
-      <h2 lang="kn" data-animate style="--i:3">ಧನ್ಯವಾದಗಳು, <strong>ಬೆಂಗಳೂರು!</strong></h2>
-      <p class="close-kannada" lang="kn" data-animate style="--i:4">ನಿಮ್ಮ ಕೋಡ್. ನಿಮ್ಮ ಸಂದರ್ಭ. <strong>ನಿಮ್ಮ ಇತಿಹಾಸ.</strong></p>
+      <p class="close-eyebrow" data-animate style="--i:2"><span class="lang-cycle"><span class="lang-line" lang="kn">ಇದು ವಿದಾಯವಲ್ಲ</span><span class="lang-line" lang="ta">இது விடைபெறுதல் அல்ல</span><span class="lang-line" lang="te">ఇది వీడ్కోలు కాదు</span><span class="lang-line" lang="ml">ഇതൊരു വിടപറയലല്ല</span><span class="lang-line" lang="hi">यह अलविदा नहीं है</span><span class="lang-line" lang="mr">हा निरोप नाही</span><span class="lang-line" lang="bn">এটা বিদায় নয়</span><span class="lang-line" lang="gu">આ વિદાય નથી</span><span class="lang-line" lang="pa">ਇਹ ਵਿਦਾਇਗੀ ਨਹੀਂ</span><span class="lang-line" lang="or">ଏହା ବିଦାୟ ନୁହେଁ</span><span class="lang-line" lang="ur">یہ الوداع نہیں</span></span> · THIS IS A CHECKPOINT</p>
+      <h2 class="lang-cycle" data-animate style="--i:3">
+        <span class="lang-line" lang="kn">ಧನ್ಯವಾದಗಳು, <strong>ಬೆಂಗಳೂರು!</strong></span>
+        <span class="lang-line" lang="ta">நன்றி, <strong>பெங்களூரு!</strong></span>
+        <span class="lang-line" lang="te">ధన్యవాదాలు, <strong>బెంగళూరు!</strong></span>
+        <span class="lang-line" lang="ml">നന്ദി, <strong>ബെംഗളൂരു!</strong></span>
+        <span class="lang-line" lang="hi">धन्यवाद, <strong>बेंगलुरु!</strong></span>
+        <span class="lang-line" lang="mr">धन्यवाद, <strong>बेंगळुरू!</strong></span>
+        <span class="lang-line" lang="bn">ধন্যবাদ, <strong>বেঙ্গালুরু!</strong></span>
+        <span class="lang-line" lang="gu">આભાર, <strong>બેંગલુરુ!</strong></span>
+        <span class="lang-line" lang="pa">ਧੰਨਵਾਦ, <strong>ਬੈਂਗਲੁਰੂ!</strong></span>
+        <span class="lang-line" lang="or">ଧନ୍ୟବାଦ, <strong>ବେଙ୍ଗାଲୁରୁ!</strong></span>
+        <span class="lang-line" lang="ur" dir="rtl">شکریہ، <strong>بنگلورو!</strong></span>
+      </h2>
+      <p class="close-native lang-cycle" data-animate style="--i:4">
+        <span class="lang-line" lang="kn">ನಿಮ್ಮ ಕೋಡ್. ನಿಮ್ಮ ಸಂದರ್ಭ. <strong>ನಿಮ್ಮ ಇತಿಹಾಸ.</strong></span>
+        <span class="lang-line" lang="ta">உங்கள் குறியீடு. உங்கள் சூழல். <strong>உங்கள் வரலாறு.</strong></span>
+        <span class="lang-line" lang="te">మీ కోడ్. మీ సందర్భం. <strong>మీ చరిత్ర.</strong></span>
+        <span class="lang-line" lang="ml">നിങ്ങളുടെ കോഡ്. നിങ്ങളുടെ സന്ദർഭം. <strong>നിങ്ങളുടെ ചരിത്രം.</strong></span>
+        <span class="lang-line" lang="hi">आपका कोड. आपका संदर्भ. <strong>आपका इतिहास.</strong></span>
+        <span class="lang-line" lang="mr">तुमचा कोड. तुमचा संदर्भ. <strong>तुमचा इतिहास.</strong></span>
+        <span class="lang-line" lang="bn">আপনার কোড। আপনার প্রেক্ষাপট। <strong>আপনার ইতিহাস।</strong></span>
+        <span class="lang-line" lang="gu">તમારો કોડ. તમારો સંદર્ભ. <strong>તમારો ઇતિહાસ.</strong></span>
+        <span class="lang-line" lang="pa">ਤੁਹਾਡਾ ਕੋਡ। ਤੁਹਾਡਾ ਪ੍ਰਸੰਗ। <strong>ਤੁਹਾਡਾ ਇਤਿਹਾਸ।</strong></span>
+        <span class="lang-line" lang="or">ଆପଣଙ୍କ କୋଡ୍। ଆପଣଙ୍କ ପ୍ରସଙ୍ଗ। <strong>ଆପଣଙ୍କ ଇତିହାସ।</strong></span>
+        <span class="lang-line" lang="ur" dir="rtl">آپ کا کوڈ۔ آپ کا سیاق۔ <strong>آپ کی تاریخ۔</strong></span>
+      </p>
       <p class="close-translation" data-animate style="--i:5">Your code. Your context. <strong>Your history.</strong></p>
-      <div class="close-links" data-animate style="--i:6">
+      <p class="lang-tag" data-animate style="--i:6">
+        <span class="lang-cycle">
+          <span class="lang-line" lang="kn"><span class="lang-native">ಕನ್ನಡ</span> · Kannada</span>
+          <span class="lang-line" lang="ta"><span class="lang-native">தமிழ்</span> · Tamil</span>
+          <span class="lang-line" lang="te"><span class="lang-native">తెలుగు</span> · Telugu</span>
+          <span class="lang-line" lang="ml"><span class="lang-native">മലയാളം</span> · Malayalam</span>
+          <span class="lang-line" lang="hi"><span class="lang-native">हिन्दी</span> · Hindi</span>
+          <span class="lang-line" lang="mr"><span class="lang-native">मराठी</span> · Marathi</span>
+          <span class="lang-line" lang="bn"><span class="lang-native">বাংলা</span> · Bengali</span>
+          <span class="lang-line" lang="gu"><span class="lang-native">ગુજરાતી</span> · Gujarati</span>
+          <span class="lang-line" lang="pa"><span class="lang-native">ਪੰਜਾਬੀ</span> · Punjabi</span>
+          <span class="lang-line" lang="or"><span class="lang-native">ଓଡ଼ିଆ</span> · Odia</span>
+          <span class="lang-line" lang="ur"><span class="lang-native">اردو</span> · Urdu</span>
+        </span>
+      </p>
+      <div class="close-links" data-animate style="--i:7">
         <img class="close-logo" src="assets/logo.svg" alt="Entire">
         <span></span>
         <p>entire.io</p>
